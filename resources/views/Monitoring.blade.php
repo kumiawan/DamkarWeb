@@ -33,7 +33,7 @@
         </div>
         <div class="updated">Terakhir diperbarui: <span id="waktu">-</span></div>
 <div class="tanggal-hari">
-    Hari & Tanggal: <span id="hari-tanggal">-</span>
+    <span id="hari-tanggal">-</span>
 </div>
 
     </div>
