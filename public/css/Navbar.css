@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+/* Navbar menu container */
+.navbar-menu {
+  flex: 1; /* biar dia fleksibel tapi gak melebihi ruang */
+  display: flex;
+  flex-wrap: wrap; /* biar tombol turun kalau sempit */
+  justify-content: center; /* tombol rata tengah */
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  background-color: #ED3237;
+  border-radius: 12px;
+  max-width: 900px; /* batasin lebarnya */
+  margin: 0 auto; /* tengahin */
+}
+
+
+/* Tombol-tombol dalam navbar */
+.custom-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #ED3237;
+  color: white;
+  font-size: 1.15rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.custom-button:hover {
+  background-color: #1C1F3A; /* Merah gelap saat hover */
+}
+
+.custom-button:active {
+  background-color: #991b1b; /* Lebih gelap saat diklik */
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Area user dan notifikasi */
+.user-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notif-button {
+  width: 45px;
+  height: 45px;
+  border-radius: 9999px;
+  border: 2px solid #ef4444;
+  background-color: transparent;
+  color: white;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.notif-button:hover {
+  background-color: rgba(239, 68, 68, 0.2);
+}
+
+.notif-button:active {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 9999px;
+  border: 2px solid #ef4444;
+  background-color: transparent;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

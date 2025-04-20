@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+.content-wrapper {
+    padding: 2.5rem; /* p-6 */
+}
+
+.title-text {
+    font-weight: 800; /* font-extrabold */
+    color: white;
+    font-size: 30px;
+}
+#map {
+    width: 100%;
+    height: 470px;
+    padding: 2.5rem;
+    margin-left: 40px;
+}
+.weather-box {
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: 470px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    margin: 0 auto; /* Menjaga agar elemen terpusat secara horizontal */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#weather-icon {
+    visibility: visible;
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 100px;  /* Ukuran gambar */
+    height: 100px; /* Ukuran gambar */
+    text-align: center; /* Menyelaraskan gambar di tengah */
+}
+
+#weather-icon img {
+    width: 100%;  /* Gambar akan mengikuti lebar elemen */
+    height: auto; /* Sesuaikan tinggi dengan lebar */
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.weather-box h2 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1e40af;
+    margin-bottom: 1rem;
+}
+
+.weather-box li {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    color: #374151;
+    display: flex;
+    justify-content: space-between;
+}
+
+.weather-box .updated {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    text-align: right;
+}
+
+.tanggal-cuaca {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2a2a2a;
+    margin-bottom: 10px; /* kasih jarak antara tanggal dan list */
+}
+
