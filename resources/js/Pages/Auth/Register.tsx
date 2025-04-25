@@ -94,7 +94,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4 flex items-center justify-end">
-                    <Button className="w-80 block bg-oren" disabled={processing}>
+                    <Button className="w-80 block bg-oren hover:bg-red-600" disabled={processing}>
                         Register
                     </Button>
 
@@ -102,7 +102,7 @@ export default function Register() {
 
                     <Link
                         href={route('login')}
-                        className="text-sm text-center block m-4"
+                        className="text-sm text-center block m-4 hover:underline"
                     >
                     Sudah punya akun?
                     </Link>

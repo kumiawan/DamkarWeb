@@ -70,12 +70,12 @@ export default function Login({
         <p className="text-center mt-2">tidak punya akun?
         <Link
         href="/register"
-        className="text-red-700 pl-2">Daftar</Link>
+        className="text-red-700 pl-2 hover:underline">Daftar</Link>
         </p>
 
         <div className="mt-4 flex items-center justify-end">
         <Button
-        className="block w-full bg-oren rounded-lg"
+        className="block w-full bg-oren rounded-lg hover:bg-red-600"
         disabled={processing}>Log in</Button>
         </div>
         </form>

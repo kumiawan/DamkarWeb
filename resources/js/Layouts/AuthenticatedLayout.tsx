@@ -15,8 +15,8 @@ export default function Authenticated({
 
     return (
         <div className="min-h-screen bg-gray-100">
-        <nav className="border-b border-gray-100 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <nav className="border-b border-gray-800 border-b-4 bg-birudongker p-4">
+        <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 justify-between">
         <div className="flex">
         <div className="flex shrink-0 items-center">
@@ -24,12 +24,60 @@ export default function Authenticated({
         className="inline-block w-16">
         <img src="/images/icon/logo-damkar.svg"/>
         </Link>
-        </div>
-
-        <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+        <h1 className="text-2xl text-bold hidden xl:inline-block text-white">Damkar Access</h1>
         </div>
         </div>
 
+        <div className="hidden lg:w-[600px] lg:gap-16 md:gap-4 sm:rounded-xl sm:justify-center sm:items-center sm:flex sm:bg-oren">
+        <NavLink
+          href="/dashboard"
+          icon={
+            <img
+              src="/images/icon/browse_activity.svg"
+              alt="Pemantauan"
+              className="w-8 h-8"
+            />
+          }
+          label="Pemantauan"
+          active={route().current('dashboard')}
+        />
+        <NavLink
+          href="/profile"
+          icon={
+            <img
+              src="/images/icon/lab_profile.svg"
+              alt="Profile"
+              className="w-8 h-8"
+            />
+          }
+          label="Profile"
+          active={route().current('profile.edit')}
+        />
+
+        <NavLink
+          href="#3"
+          icon={
+            <img
+              src="/images/icon/map.svg"
+              alt="map"
+              className="w-8 h-8"
+            />
+          }
+          label="Peta & Navigasi"
+        />
+        <NavLink
+          href="#4"
+          icon={
+            <img
+              src="/images/icon/monitoring.svg"
+              alt="stat"
+              className="w-8 h-8"
+            />
+          }
+          label="Riwayat & Statistik"
+        />
+
+        </div>
         <div className="hidden sm:ms-6 sm:flex sm:items-center">
         <div className="relative ms-3">
         <Dropdown>
@@ -129,7 +177,7 @@ export default function Authenticated({
         href={route('dashboard')}
         active={route().current('dashboard')}
         >
-        Dashboard
+        Pemantauan
         </ResponsiveNavLink>
         </div>
 
@@ -160,8 +208,8 @@ export default function Authenticated({
         </nav>
 
         {header && (
-            <header className="bg-white shadow">
-            <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <header className="bg-birudongker shadow">
+            <div className="px-4 py-6 sm:px-6 lg:px-8">
             {header}
             </div>
             </header>
