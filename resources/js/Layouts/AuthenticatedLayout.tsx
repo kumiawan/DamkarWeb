@@ -14,7 +14,7 @@ export default function Authenticated({
         useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-birudongker">
         <nav className="border-b border-gray-800 border-b-4 bg-birudongker p-4">
         <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 justify-between">
