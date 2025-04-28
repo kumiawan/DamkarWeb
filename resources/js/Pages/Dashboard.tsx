@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import MapView from '@/components/ui/MapView';
 
 type Laporan = {
     id: number;
@@ -32,8 +33,8 @@ export default function Dashboard({ laporans }: DashboardProps) {
             <Head title="Pemantauan" />
 
             <div className="grid md:grid-cols-4">
-                <div className="h-80 md:col-span-3 bg-oren">
-                map
+                <div className="max-h-64 md:col-span-3 bg-oren">
+            <MapView/>
                 </div>
                 <div className="bg-birudongker">
                     cuaca
