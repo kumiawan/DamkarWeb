@@ -64,6 +64,7 @@ export default function Authenticated({
             />
           }
           label="Peta & Navigasi"
+          active={route().current('#map')}
         />
         <NavLink
           href="#4"
@@ -75,6 +76,7 @@ export default function Authenticated({
             />
           }
           label="Riwayat & Statistik"
+          active={route().current('#riwayat')}
         />
 
         </div>
