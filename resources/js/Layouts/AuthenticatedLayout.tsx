@@ -28,7 +28,7 @@ export default function Authenticated({
         </div>
         </div>
 
-        <div className="hidden lg:w-[600px] lg:gap-16 md:gap-4 sm:rounded-xl sm:justify-center sm:items-center sm:flex sm:bg-oren">
+        <div className="hidden lg:w-[645px] lg:gap-16 md:gap-4 sm:rounded-xl sm:justify-center sm:items-center sm:flex sm:bg-oren">
         <NavLink
           href="/dashboard"
           icon={

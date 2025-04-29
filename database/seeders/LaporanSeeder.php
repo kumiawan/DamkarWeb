@@ -15,7 +15,7 @@ class LaporanSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
+        $faker = Faker::create('id_ID');
 
         // Menggunakan DB facade untuk menambah data langsung ke database
         for ($i = 0; $i < 10; $i++) {
@@ -23,7 +23,7 @@ class LaporanSeeder extends Seeder
                 'lokasi' => $faker->city,
                 'nama_pelapor' => $faker->name,
                 'no_hp_pelapor' => $faker->phoneNumber,
-                'jenis_kebakaran' => $faker->word,
+                'jenis_kebakaran' => $faker->randomElement(['Kebakaran','Penyelamatan','Edukasi']),
                 'status' => 'menunggu',
                 'created_at' => now(),
                 'updated_at' => now(),
