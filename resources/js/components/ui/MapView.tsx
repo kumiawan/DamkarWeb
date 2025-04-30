@@ -19,13 +19,31 @@ L.Icon.Default.mergeOptions({
 const MapView = () => {
   return (
     <div className="h-80">
-      <MapContainer center={[-8.155870, 113.716622]} zoom={15} style={{ height: '100%', width: '100%' }}>
+      <MapContainer
+        center={[-8.15587, 113.716622]}
+        zoom={15}
+        style={{ height: '100%', width: '100%' }}
+      >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[-8.155870, 113.726622]}> <Popup> KEBAKARAN! <br />(Latihan)</Popup> </Marker>
-        <Marker position={[-8.155870, 113.716777]}> <Popup> KEBAKARAN! <br />(Latihan)</Popup> </Marker>
+        <Marker position={[-8.15587, 113.726622]}>
+          {' '}
+          <Popup>
+            {' '}
+            KEBAKARAN! <br />
+            (Latihan)
+          </Popup>{' '}
+        </Marker>
+        <Marker position={[-8.15587, 113.716777]}>
+          {' '}
+          <Popup>
+            {' '}
+            KEBAKARAN! <br />
+            (Latihan)
+          </Popup>{' '}
+        </Marker>
       </MapContainer>
     </div>
   );

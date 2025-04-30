@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { fetchWeather, WeatherData } from "@/Services/weatherService";
+import React, { useEffect, useState } from 'react';
+import { fetchWeather, WeatherData } from '@/Services/weatherService';
 
 interface WeatherWidgetProps {
   city: string;
@@ -7,22 +7,22 @@ interface WeatherWidgetProps {
 
 const getWeatherIcon = (weatherMain: string): string => {
   switch (weatherMain) {
-    case "Clear":
-      return "https://openweathermap.org/img/wn/01d@2x.png";
-    case "Rain":
-      return "https://openweathermap.org/img/wn/10d@2x.png";
-    case "Clouds":
-      return "https://openweathermap.org/img/wn/03d@2x.png";
-    case "Thunderstorm":
-      return "https://openweathermap.org/img/wn/11d@2x.png";
-    case "Snow":
-      return "https://openweathermap.org/img/wn/13d@2x.png";
-    case "Drizzle":
-      return "https://openweathermap.org/img/wn/09d@2x.png";
-    case "Wind":
-      return "https://openweathermap.org/img/wn/50d@2x.png";
+    case 'Clear':
+      return 'https://openweathermap.org/img/wn/01d@2x.png';
+    case 'Rain':
+      return 'https://openweathermap.org/img/wn/10d@2x.png';
+    case 'Clouds':
+      return 'https://openweathermap.org/img/wn/03d@2x.png';
+    case 'Thunderstorm':
+      return 'https://openweathermap.org/img/wn/11d@2x.png';
+    case 'Snow':
+      return 'https://openweathermap.org/img/wn/13d@2x.png';
+    case 'Drizzle':
+      return 'https://openweathermap.org/img/wn/09d@2x.png';
+    case 'Wind':
+      return 'https://openweathermap.org/img/wn/50d@2x.png';
     default:
-      return "https://openweathermap.org/img/wn/01d@2x.png";
+      return 'https://openweathermap.org/img/wn/01d@2x.png';
   }
 };
 
@@ -37,7 +37,7 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({ city }) => {
         const data = await fetchWeather(city);
         setWeather(data);
       } catch (err) {
-        setError("Gagal memuat data cuaca.");
+        setError('Gagal memuat data cuaca.');
       } finally {
         setLoading(false);
       }
@@ -48,8 +48,29 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({ city }) => {
 
   const formatDate = () => {
     const now = new Date();
-    const hariList = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-    const bulanList = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    const hariList = [
+      'Minggu',
+      'Senin',
+      'Selasa',
+      'Rabu',
+      'Kamis',
+      'Jumat',
+      'Sabtu',
+    ];
+    const bulanList = [
+      'Januari',
+      'Februari',
+      'Maret',
+      'April',
+      'Mei',
+      'Juni',
+      'Juli',
+      'Agustus',
+      'September',
+      'Oktober',
+      'November',
+      'Desember',
+    ];
 
     const hari = hariList[now.getDay()];
     const tanggal = now.getDate();
@@ -60,7 +81,7 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({ city }) => {
   };
 
   if (loading) return <div>Memuat informasi cuaca...</div>;
-  if (error || !weather) return <div>{error || "Data tidak tersedia"}</div>;
+  if (error || !weather) return <div>{error || 'Data tidak tersedia'}</div>;
 
   const weatherIcon = getWeatherIcon(weather.weather[0].main);
 
@@ -69,25 +90,40 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({ city }) => {
       <div>
         <div className="text-center mb-2">{formatDate()}</div>
         <div id="weather-icon" className="mb-2">
-          <img src={weatherIcon} alt="Ikon Cuaca" className="w-16 h-16 mx-auto" />
+          <img
+            src={weatherIcon}
+            alt="Ikon Cuaca"
+            className="w-16 h-16 mx-auto"
+          />
         </div>
 
-
         <ul className="space-y-1 text-xs">
-          <li><span className="font-semibold text-center text-2xl inline-block w-full">{weather.main.temp}°C</span> </li>
-          <li><span className="text-center text-xs inline-block w-full">{weather.name}</span> </li>
-          <li><span className=" text-lg inline-block text-center w-full">{weather.weather[0].description}</span></li>
+          <li>
+            <span className="font-semibold text-center text-2xl inline-block w-full">
+              {weather.main.temp}°C
+            </span>{' '}
+          </li>
+          <li>
+            <span className="text-center text-xs inline-block w-full">
+              {weather.name}
+            </span>{' '}
+          </li>
+          <li>
+            <span className=" text-lg inline-block text-center w-full">
+              {weather.weather[0].description}
+            </span>
+          </li>
         </ul>
         <div className="flex justify-around items-center bg-blue-800 rounded-lg p-2 mt-4">
           <div className="inline-grid">
-          <span className="font-semibold">{weather.main.humidity}%</span>
-          <span className="text-center text-xs">humadity</span>
+            <span className="font-semibold">{weather.main.humidity}%</span>
+            <span className="text-center text-xs">humadity</span>
           </div>
           <div className="inline-grid">
-          <span className="font-semibold">{weather.wind.speed} m/s </span>
-          <span className="text-center text-xs">wind speed</span>
+            <span className="font-semibold">{weather.wind.speed} m/s </span>
+            <span className="text-center text-xs">wind speed</span>
           </div>
-          </div>
+        </div>
       </div>
     </div>
   );

@@ -25,12 +25,10 @@ export default function NavLink({
         active
           ? 'bg-birutuek text-white font-semibold'
           : 'text-gray-500 hover:text-gray-700 hover:bg-birutuek',
-        className
+        className,
       )}
     >
-      <span className="text-xl">
-      {icon}
-      </span>
+      <span className="text-xl">{icon}</span>
       {active && <span className="text-sm">{label}</span>}
     </Link>
   );
