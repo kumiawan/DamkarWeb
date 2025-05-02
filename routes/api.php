@@ -14,7 +14,7 @@ Route::get('/laporan/{id}', [LaporanController::class, 'show']);
 
 
 
-Route::get('/weather', function (\Illuminate\Http\Request $request) {
+Route::get('/weather', function (Request $request) {
     $city = $request->query('city', 'Jember');
 
     $apiKey = env('OPENWEATHER_API_KEY');
