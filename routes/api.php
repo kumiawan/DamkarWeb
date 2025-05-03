@@ -13,7 +13,6 @@ Route::get('/laporan', [LaporanController::class, 'index']);
 Route::get('/laporan/{id}', [LaporanController::class, 'show']);
 
 
-
 Route::get('/weather', function (Request $request) {
     $city = $request->query('city', 'Jember');
 

@@ -36,10 +36,7 @@ class LaporanController extends Controller
 
     public function show($id)
     {
-        $laporan = Laporan::find($id);
-        if(!$laporan){
-            return response()->json(['pesan' => 'Laporan tidak di temukan', 404]);
-        }
+        $laporan = Laporan::findOrFail($id);
         return response()->json($laporan,200);
     }
 

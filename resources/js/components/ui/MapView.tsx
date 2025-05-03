@@ -18,7 +18,7 @@ L.Icon.Default.mergeOptions({
 
 const MapView = () => {
   return (
-    <div className="h-80">
+    <div className="relative z-0 h-80">
       <MapContainer
         center={[-8.15587, 113.716622]}
         zoom={15}
