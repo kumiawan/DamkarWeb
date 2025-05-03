@@ -5,7 +5,7 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Button } from '@/components/ui/button';
 import MapView from '@/components/ui/MapView';
 import WeatherWidget from '@/components/ui/WeatherWidget';
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, } from '@/components/ui/dialog'
 import Checkbox from '@/components/Checkbox';
 import { Textarea } from '@/components/ui/textarea';
@@ -19,12 +19,41 @@ type Laporan = {
   no_hp_pelapor: string;
   status: string;
   foto: string[];
+  lat: number;
+  lng: number;
 };
 interface DashboardProps {
   laporans: Laporan[];
 }
 
-export default function Dashboard({ laporans }: DashboardProps) {
+export default function Dashboard(props: DashboardProps) {
+
+const [laporans, setLaporans] = useState<Laporan[]>(props.laporans);
+    useEffect(() => {
+    let isMounted = true ;
+      const fetchLaporans = async () => {
+          const response = await fetch('/api/laporan');
+          const data = await response.json()
+          setLaporans(data);
+      };
+
+      fetchLaporans();
+      const interval = setInterval(fetchLaporans, 30000);
+
+  return () => {
+    isMounted = false;
+    clearInterval(interval);
+  };
+    }, []);
+
+
+const markers = laporans.map((laporan) => ({
+  lat: laporan.lat,
+  lng: laporan.lng,
+  jenis: laporan.jenis_kebakaran,
+}));
+
+const [selectedLocation, setSelectedLocation] = useState<{lat: number; lng:number} | null >(null)
 
 const [open, setOpen] = useState(false)
 const [selectedLaporan, setSelectedLaporan] = useState<Laporan | null>(null)
@@ -50,7 +79,7 @@ const handleOpenModal = (laporan: Laporan) => {
 
       <div className="grid md:grid-cols-4">
         <div className="max-h-80 md:col-span-3 bg-oren border rounded rounded-lg border-blue-600 m-2">
-          <MapView />
+          <MapView markers={markers} selectedLocation={selectedLocation}/>
         </div>
 
         <div className="flex bg-gradient-to-b from-birudongker to-birutuek items-center justify-center max-h-80 border rounded rounded-lg border-blue-600 m-2">
@@ -73,6 +102,7 @@ const handleOpenModal = (laporan: Laporan) => {
                       <TableHead>No HP Pelapor</TableHead>
                       <TableHead>Jenis</TableHead>
                       <TableHead>Aksi</TableHead>
+                      <TableHead>Lihat di Peta</TableHead>
                     </TableRow>
                   </TableHeader>
                 </Table>
@@ -95,7 +125,17 @@ const handleOpenModal = (laporan: Laporan) => {
                             onClick={() => handleOpenModal(laporan)}
                           >
                             Lihat Detail
-                          </Button></TableCell>
+                          </Button>
+
+                          </TableCell>
+                        <TableCell>
+                        <Button
+                        className="bg-white text-black hover:bg-slate-300"
+                            onClick={() => setSelectedLocation({ lat:laporan.lat, lng:laporan.lng})}
+                          >
+                            Cek
+                          </Button>
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

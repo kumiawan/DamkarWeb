@@ -18,6 +18,8 @@ class LaporanController extends Controller
         $req->validate([
             'jenis_kebakaran' => 'required|string|max:255',
             'lokasi' => 'required|string|max:255',
+            'lat' => 'required|numeric',
+            'lng' => 'required|numeric',
             'nama_pelapor' => 'required|string|max:255',
             'no_hp_pelapor' => 'required|string|max:15',
             'status' => 'nullable|string|max:50',
@@ -26,6 +28,8 @@ class LaporanController extends Controller
         $laporan = Laporan::create([
             'jenis_kebakaran' => $req->jenis_kebakaran,
             'lokasi' => $req->lokasi,
+            'lat' => $req->lat,
+            'lng' => $req->lng,
             'nama_pelapor' => $req->nama_pelapor,
             'no_hp_pelapor' => $req->no_hp_pelapor,
             'status' => $req->status ?? 'menunggu',

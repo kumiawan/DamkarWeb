@@ -15,6 +15,8 @@ class CreateLaporansTable extends Migration
             $table->id();
             $table->string('jenis_kebakaran');
             $table->string('lokasi');
+            $table->decimal('lat',10,6);
+            $table->decimal('lng',10,6);
             $table->string('nama_pelapor');
             $table->string('no_hp_pelapor');
             $table->timestamp('waktu_lapor')->useCurrent();

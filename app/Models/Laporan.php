@@ -12,6 +12,10 @@ class Laporan extends Model
     protected $fillable = [
         'jenis_kebakaran',
         'lokasi',
+        'lat',
+        'lng',
+        'latitude',
+        'longitude',
         'nama_pelapor',
         'no_hp_pelapor',
         'status',
