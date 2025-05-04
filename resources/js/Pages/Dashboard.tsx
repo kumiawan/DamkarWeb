@@ -86,7 +86,7 @@ const handleOpenModal = (laporan: Laporan) => {
           <WeatherWidget city="Jember" />
         </div>
 
-        <div className="h-96 md:col-span-3 p-4 border rounded rounded-lg border-blue-600 m-2 bg-gradient-to-b from-birudongker to-birutuek ">
+        <div className="h-96 md:col-span-4 p-4 border rounded rounded-lg border-blue-600 m-2 bg-gradient-to-b from-birudongker to-birutuek ">
           <div>
             <h3 className="text-lg font-bold mb-4 text-white">Laporan Masuk</h3>
           </div>
@@ -205,7 +205,6 @@ const handleOpenModal = (laporan: Laporan) => {
   <div className="flex gap-4">
     <Button className="bg-green-500 hover:bg-green-800"> Terima </Button>
     <Button className="bg-red-500 hover:bg-red-800"> Tolak </Button>
-    <Button className="bg-blue-500 hover:bg-blue-800"> Hubungi Pelapor </Button>
   </div>
 </form>
 
@@ -220,7 +219,7 @@ const handleOpenModal = (laporan: Laporan) => {
             </div>
           </div>
         </div>
-        <div className="p-2 border rounded rounded-lg border-blue-600 m-2 bg-gradient-to-b from-birudongker to-birutuek ">
+        <div className="hidden p-2 border rounded rounded-lg border-blue-600 m-2 bg-gradient-to-b from-birudongker to-birutuek ">
           <h3 className="text-lg font-bold mb-4 text-white">Status Tim</h3>
           <div>
             <ul className="flex items-center gap-2 text-white text-xs mb-4">

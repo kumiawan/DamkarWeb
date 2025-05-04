@@ -2,6 +2,7 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 import { Input } from '@/components/ui/input';
+import { InputError } from '@/components/InputError';
 import { Button } from '@/components/ui/button';
 
 export default function Register() {
@@ -40,6 +41,7 @@ export default function Register() {
             placeholder="name"
             required
           />
+          <InputError message={errors.nama} className="mt-2 text-red-600" />
         </div>
 
         <div className="mt-4">
@@ -54,6 +56,7 @@ export default function Register() {
             placeholder="email"
             required
           />
+          <InputError message={errors.email} className="mt-2 text-red-600" />
         </div>
 
         <div className="mt-4">
@@ -68,6 +71,7 @@ export default function Register() {
             placeholder="password"
             required
           />
+          <InputError message={errors.password} className="mt-2 text-red-600" />
         </div>
 
         <div className="mt-4">

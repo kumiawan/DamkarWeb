@@ -4,6 +4,7 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 import { Input } from '@/components/ui/input';
+import { InputError } from '@/components/InputError';
 import { Button } from '@/components/ui/button';
 
 export default function Login({
@@ -16,7 +17,7 @@ export default function Login({
   const { data, setData, post, processing, errors, reset } = useForm({
     email: '',
     password: '',
-    remember: false as boolean,
+    remember: false,
   });
 
   const submit: FormEventHandler = (e) => {
@@ -32,12 +33,15 @@ export default function Login({
       <Head title="Log in" />
 
       <img src="/images/icon/logo-login.svg" />
+
       {status && (
         <div className="mb-4 text-sm font-medium text-green-600">{status}</div>
       )}
 
       <form onSubmit={submit}>
-        <p className="text-center text-3xl my-4"> Silahkan Login </p>
+        <p className="text-center text-3xl my-4">Silahkan Login</p>
+
+        {/* Email */}
         <div>
           <Input
             id="email"
@@ -50,8 +54,10 @@ export default function Login({
             onChange={(e) => setData('email', e.target.value)}
             placeholder="Email"
           />
+          <InputError message={errors.email} className="mt-2 text-red-600" />
         </div>
 
+        {/* Password */}
         <div className="mt-4">
           <Input
             id="password"
@@ -63,15 +69,18 @@ export default function Login({
             onChange={(e) => setData('password', e.target.value)}
             placeholder="Password"
           />
+          <InputError message={errors.password} className="mt-2 text-red-600" />
         </div>
 
+        {/* Register link */}
         <p className="text-center mt-2">
-          tidak punya akun?
+          Tidak punya akun?
           <Link href="/register" className="text-red-700 pl-2 hover:underline">
             Daftar
           </Link>
         </p>
 
+        {/* Submit button */}
         <div className="mt-4 flex items-center justify-end">
           <Button
             className="block w-full bg-oren rounded-lg hover:bg-red-600"
