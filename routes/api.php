@@ -4,9 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LaporanController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
+    Route::get('/user/profile', [Api\UserController::class, 'profile']);
+    // Tambahkan endpoint lain khusus mobile user
+});
 
 Route::post('/laporan', [LaporanController::class, 'create']);
 Route::get('/laporan', [LaporanController::class, 'index']);

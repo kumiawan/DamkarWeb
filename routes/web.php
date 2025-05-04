@@ -10,9 +10,10 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/dashboard', [PemantauanController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/dashboard', [PemantauanController::class, 'index'])->name('dashboard');
+    // route lainnya di sini
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

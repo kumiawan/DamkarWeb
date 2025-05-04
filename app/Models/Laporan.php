@@ -14,8 +14,6 @@ class Laporan extends Model
         'lokasi',
         'lat',
         'lng',
-        'latitude',
-        'longitude',
         'nama_pelapor',
         'no_hp_pelapor',
         'status',

@@ -37,7 +37,7 @@ const WeatherWidget: React.FC<WeatherWidgetProps> = ({ city }) => {
         const data = await fetchWeather(city);
         setWeather(data);
       } catch (err) {
-        setError('Gagal memuat data cuaca.');
+        setError('Server data cuaca sedang gangguan.');
       } finally {
         setLoading(false);
       }
