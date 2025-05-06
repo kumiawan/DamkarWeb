@@ -42,21 +42,22 @@ export default function Authenticated({
                 label="Pemantauan"
                 active={route().current('dashboard')}
               />
-              <NavLink
-                href="/profile"
-                icon={
-                  <img
-                    src="/images/icon/lab_profile.svg"
-                    alt="Profile"
-                    className="w-8 h-8"
-                  />
-                }
-                label="Profile"
-                active={route().current('profile.edit')}
-              />
+<NavLink
+  href="/laporan"
+  icon={
+    <img
+      src="/images/icon/lab_profile.svg"
+      alt="Laporan masuk"
+      className="w-8 h-8"
+    />
+  }
+  label="Laporan Masuk"
+  active={route().current('laporan.page')}
+/>
 
               <NavLink
                 href="#3"
+                className="hidden"
                 icon={
                   <img
                     src="/images/icon/map.svg"
@@ -68,16 +69,16 @@ export default function Authenticated({
                 active={route().current('#map')}
               />
               <NavLink
-                href="#4"
+                href="/profile"
                 icon={
                   <img
                     src="/images/icon/monitoring.svg"
-                    alt="stat"
+                    alt="Profile"
                     className="w-8 h-8"
                   />
                 }
-                label="Riwayat & Statistik"
-                active={route().current('#riwayat')}
+                label="Profile"
+                active={route().current('profile.edit')}
               />
             </div>
             <div className="hidden sm:ms-6 sm:flex sm:items-center">
