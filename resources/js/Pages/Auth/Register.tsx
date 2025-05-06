@@ -41,7 +41,7 @@ export default function Register() {
             placeholder="name"
             required
           />
-          <InputError message={errors.nama} className="mt-2 text-red-600" />
+          <InputError message={errors.name} className="mt-2 text-red-600" />
         </div>
 
         <div className="mt-4">
