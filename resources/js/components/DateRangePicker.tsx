@@ -8,8 +8,10 @@ import { useState } from "react";
 
 export default function DateRangePicker({
   onChange,
+  className,
 }: {
   onChange?: (range: DateRange | undefined) => void;
+  className?: string;
 }) {
   const [date, setDate] = useState<DateRange | undefined>();
 
@@ -23,7 +25,7 @@ export default function DateRangePicker({
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="w-[300px] justify-start text-left font-normal"
+          className={`w-[300px] justify-start text-left font-normal ${className}`}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {date?.from ? (
