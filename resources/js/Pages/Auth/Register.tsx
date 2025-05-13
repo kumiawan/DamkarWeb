@@ -10,6 +10,7 @@ export default function Register() {
     name: '',
     email: '',
     password: '',
+    notlp:'',
     password_confirmation: '',
   });
 
@@ -54,6 +55,21 @@ export default function Register() {
             autoComplete="username"
             onChange={(e) => setData('email', e.target.value)}
             placeholder="email"
+            required
+          />
+          <InputError message={errors.email} className="mt-2 text-red-600" />
+        </div>
+
+        <div className="mt-4">
+          <Input
+            id="notlp"
+            type="notlp"
+            name="notlp"
+            value={data.notlp}
+            className="mt-1 block w-80"
+            autoComplete="notlp"
+            onChange={(e) => setData('notlp', e.target.value)}
+            placeholder="08***"
             required
           />
           <InputError message={errors.email} className="mt-2 text-red-600" />
