@@ -18,7 +18,7 @@ class CreateLaporansTable extends Migration
             $table->decimal('lat',10,6);
             $table->decimal('lng',10,6);
             $table->string('nama_pelapor');
-            $table->string('no_hp_pelapor');
+            $table->string('notlp');
             $table->timestamp('waktu_lapor')->useCurrent();
             $table->string('status');
             $table->text('catatan')->nullable();

@@ -15,7 +15,7 @@ class Laporan extends Model
         'lat',
         'lng',
         'nama_pelapor',
-        'no_hp_pelapor',
+        'notlp',
         'status',
     ];
 }

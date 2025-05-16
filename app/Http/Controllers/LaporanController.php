@@ -21,7 +21,7 @@ class LaporanController extends Controller
             'lat' => 'required|numeric',
             'lng' => 'required|numeric',
             'nama_pelapor' => 'required|string|max:255',
-            'no_hp_pelapor' => 'required|string|max:15',
+            'notlp' => 'required|string|max:15',
             'status' => 'nullable|string|max:50',
         ]);
 
@@ -31,7 +31,7 @@ class LaporanController extends Controller
             'lat' => $req->lat,
             'lng' => $req->lng,
             'nama_pelapor' => $req->nama_pelapor,
-            'no_hp_pelapor' => $req->no_hp_pelapor,
+            'notlp' => $req->notlp,
             'status' => $req->status ?? 'menunggu',
         ]);
 

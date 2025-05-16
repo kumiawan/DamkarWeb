@@ -7,7 +7,7 @@ type Laporan = {
   jenis_kebakaran: string;
   lokasi: string;
   nama_pelapor: string;
-  no_hp_pelapor: string;
+  notlp: string;
   status: string;
   foto: string[];
   lat: number;
@@ -16,6 +16,7 @@ type Laporan = {
 
 interface LaporanTableProps {
   laporans: Laporan[];
+  onDeleteClick?: (laporan: Laporan) => void;
   onDetailClick?: (laporan: Laporan) => void;
   onMapClick?: (lat: number, lng: number) => void;
   showMapButton?: boolean; // << Tambahan
@@ -41,7 +42,7 @@ export default function LaporanTable({ laporans, onDetailClick, onMapClick,showM
               <TableCell className="font-medium w-16">{laporan.id}</TableCell>
               <TableCell>{laporan.lokasi}</TableCell>
               <TableCell>{laporan.nama_pelapor}</TableCell>
-              <TableCell>{laporan.no_hp_pelapor}</TableCell>
+              <TableCell>{laporan.notlp}</TableCell>
               <TableCell>{laporan.jenis_kebakaran}</TableCell>
               <TableCell>
                 <Button
@@ -52,13 +53,15 @@ export default function LaporanTable({ laporans, onDetailClick, onMapClick,showM
                 </Button>
               </TableCell>
               {showMapButton !== false && (
-                <TableCell>
+                <TableCell className="flex">
                   <Button
                     className="bg-white text-black hover:bg-slate-300"
                     onClick={() => onMapClick?.(laporan.lat, laporan.lng)}
                   >
                     Cek
                   </Button>
+                  test
+
                 </TableCell>
               )}
             </TableRow>

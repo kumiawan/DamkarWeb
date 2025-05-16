@@ -16,7 +16,7 @@ type Laporan = {
   jenis_kebakaran: string;
   lokasi: string;
   nama_pelapor: string;
-  no_hp_pelapor: string;
+  notlp: string;
   status: string;
   foto: string[];
   lat: number;
@@ -117,7 +117,7 @@ const handleOpenModal = (laporan: Laporan) => {
                         </TableCell>
                         <TableCell>{laporan.lokasi}</TableCell>
                         <TableCell>{laporan.nama_pelapor}</TableCell>
-                        <TableCell>{laporan.no_hp_pelapor}</TableCell>
+                        <TableCell>{laporan.notlp}</TableCell>
                         <TableCell>{laporan.jenis_kebakaran}</TableCell>
                         <TableCell>
                         <Button

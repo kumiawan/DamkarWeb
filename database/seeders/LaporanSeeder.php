@@ -24,7 +24,7 @@ class LaporanSeeder extends Seeder
                 'lat'=> $faker->randomFloat(6, -90, 90),
                 'lng'=> $faker->randomFloat(6, -90, 90),
                 'nama_pelapor' => $faker->name,
-                'no_hp_pelapor' => $faker->phoneNumber,
+                'notlp' => $faker->phoneNumber,
                 'jenis_kebakaran' => $faker->randomElement(['Kebakaran','Penyelamatan','Edukasi']),
                 'status' => 'menunggu',
                 'created_at' => now(),

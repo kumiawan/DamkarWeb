@@ -8,7 +8,7 @@ type Laporan = {
   jenis_kebakaran: string;
   lokasi: string;
   nama_pelapor: string;
-  no_hp_pelapor: string;
+  notlp: string;
   status: string;
   foto: string[];
   lat: number;
@@ -37,7 +37,7 @@ export default function LaporanDetailDialog({ open, onOpenChange, laporan }: Lap
               <p><strong>ID:</strong> {laporan.id}</p>
               <p><strong>Lokasi Laporan:</strong> {laporan.lokasi}</p>
               <p><strong>Nama Pelapor:</strong> {laporan.nama_pelapor}</p>
-              <p><strong>No HP Pelapor:</strong> {laporan.no_hp_pelapor}</p>
+              <p><strong>No HP Pelapor:</strong> {laporan.notlp}</p>
               <p><strong>Jenis Kebakaran:</strong> {laporan.jenis_kebakaran}</p>
               <p><strong>Laporan Foto:</strong></p>
               <div className="flex gap-2 overflow-x-auto py-2">
