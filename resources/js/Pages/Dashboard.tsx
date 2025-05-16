@@ -153,7 +153,7 @@ const handleOpenModal = (laporan: Laporan) => {
                     <p><strong>ID:</strong> {selectedLaporan.id}</p>
                     <p><strong>Lokasi Laporan:</strong> {selectedLaporan.lokasi}</p>
                     <p><strong>Nama Pelapor:</strong> {selectedLaporan.nama_pelapor}</p>
-                    <p><strong>No HP Pelapor:</strong> {selectedLaporan.no_hp_pelapor}</p>
+                    <p><strong>No HP Pelapor:</strong> {selectedLaporan.notlp}</p>
                     <p><strong>Catatan Pelapor:</strong> {selectedLaporan.jenis_kebakaran}</p>
                     <p><strong>Laporan Foto:</strong> </p>
                     <div className="flex gap-2 overflow-x-auto py-2">
