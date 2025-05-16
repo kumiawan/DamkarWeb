@@ -17,5 +17,6 @@ class Laporan extends Model
         'nama_pelapor',
         'notlp',
         'status',
+        'catatan',
     ];
 }

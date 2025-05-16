@@ -38,7 +38,7 @@ export default function LaporanDetailDialog({ open, onOpenChange, laporan }: Lap
               <p><strong>Lokasi Laporan:</strong> {laporan.lokasi}</p>
               <p><strong>Nama Pelapor:</strong> {laporan.nama_pelapor}</p>
               <p><strong>No HP Pelapor:</strong> {laporan.notlp}</p>
-              <p><strong>Jenis Kebakaran:</strong> {laporan.jenis_kebakaran}</p>
+              <p><strong>Jenis :</strong> {laporan.jenis_kebakaran}</p>
               <p><strong>Laporan Foto:</strong></p>
               <div className="flex gap-2 overflow-x-auto py-2">
                 {laporan.foto?.length > 0 ? (

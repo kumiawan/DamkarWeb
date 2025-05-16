@@ -23,6 +23,7 @@ class LaporanController extends Controller
             'nama_pelapor' => 'required|string|max:255',
             'notlp' => 'required|string|max:15',
             'status' => 'nullable|string|max:50',
+            'catatan' => 'nullable|string|max:255',
         ]);
 
         $laporan = Laporan::create([
@@ -33,6 +34,7 @@ class LaporanController extends Controller
             'nama_pelapor' => $req->nama_pelapor,
             'notlp' => $req->notlp,
             'status' => $req->status ?? 'menunggu',
+            'catatan' => $reg->catatan,
         ]);
 
         return response()->json($laporan, 201);

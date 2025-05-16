@@ -154,7 +154,7 @@ const handleOpenModal = (laporan: Laporan) => {
                     <p><strong>Lokasi Laporan:</strong> {selectedLaporan.lokasi}</p>
                     <p><strong>Nama Pelapor:</strong> {selectedLaporan.nama_pelapor}</p>
                     <p><strong>No HP Pelapor:</strong> {selectedLaporan.notlp}</p>
-                    <p><strong>Catatan Pelapor:</strong> {selectedLaporan.jenis_kebakaran}</p>
+                    <p><strong>Jenis:</strong> {selectedLaporan.jenis_kebakaran}</p>
                     <p><strong>Laporan Foto:</strong> </p>
                     <div className="flex gap-2 overflow-x-auto py-2">
                     {selectedLaporan.foto?.length > 0 ? (
@@ -201,7 +201,6 @@ const handleOpenModal = (laporan: Laporan) => {
     <p className="text-sm font-medium text-gray-700 mb-2">Catatan Verifikasi:</p>
     <Textarea/>
   </div>
-  foto
   <div className="flex gap-4">
     <Button className="bg-green-500 hover:bg-green-800"> Terima </Button>
     <Button className="bg-red-500 hover:bg-red-800"> Tolak </Button>

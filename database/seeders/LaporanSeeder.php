@@ -27,6 +27,7 @@ class LaporanSeeder extends Seeder
                 'notlp' => $faker->phoneNumber,
                 'jenis_kebakaran' => $faker->randomElement(['Kebakaran','Penyelamatan','Edukasi']),
                 'status' => 'menunggu',
+                'catatan' => $faker->randomElement(['1','2','3']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
