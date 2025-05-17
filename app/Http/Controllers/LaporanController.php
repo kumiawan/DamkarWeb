@@ -34,7 +34,7 @@ class LaporanController extends Controller
             'nama_pelapor' => $req->nama_pelapor,
             'notlp' => $req->notlp,
             'status' => $req->status ?? 'menunggu',
-            'catatan' => $reg->catatan,
+            'catatan' => $req->catatan,
         ]);
 
         return response()->json($laporan, 201);
@@ -44,6 +44,23 @@ class LaporanController extends Controller
     {
         $laporan = Laporan::findOrFail($id);
         return response()->json($laporan,200);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $laporan = Laporan::findOrFail($id);
+
+        $request->validate([
+            'status' => 'required|string|max:50',
+            'catatan' => 'nullable|string|max:255',
+        ]);
+
+        $laporan->status = $request->status;
+        $laporan->catatan = $request->catatan;
+        $laporan->save();
+
+        return response()->json($laporan);
     }
 
 }

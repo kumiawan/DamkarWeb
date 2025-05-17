@@ -25,15 +25,26 @@ export default function Page() {
   const [selectedLaporan, setSelectedLaporan] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("menunggu");
+
+const fetchLaporan = async () => {
+    try {
+      const response = await axios.get('/api/laporan');
+      setLaporan(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Gagal mengambil laporan:', error);
+      setLoading(false);
+    }
+  };
 
   // Statistik Cepat
   const totalHariIni = laporan.filter(l =>
     new Date(l.waktu_lapor).toDateString() === new Date().toDateString()
   ).length;
 
-  const totalDiproses = laporan.filter(l =>
-    l.status?.toLowerCase() === 'di prosess'
+  const totalLaporanSelesai = laporan.filter(l =>
+    l.status?.toLowerCase() === 'selesai'
   ).length;
 
   const totalSpam = laporan.filter(l =>
@@ -101,8 +112,8 @@ export default function Page() {
               <div className="text-sm">Total Laporan masuk hari Ini</div>
             </div>
             <div className="bg-yellow-600 p-4 rounded-xl shadow-md text-center">
-              <div className="text-xl font-bold">{totalDiproses}</div>
-              <div className="text-sm">Total Laporan sedang diproses</div>
+              <div className="text-xl font-bold">{totalLaporanSelesai}</div>
+              <div className="text-sm">Total Laporan telah Selesai</div>
             </div>
             <div className="bg-red-600 p-4 rounded-xl shadow-md text-center">
               <div className="text-xl font-bold">{totalSpam}</div>
@@ -127,7 +138,6 @@ export default function Page() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="menunggu">Menunggu</SelectItem>
-                <SelectItem value="Di prosess">Diproses</SelectItem>
                 <SelectItem value="spam">Spam</SelectItem>
                 <SelectItem value="selesai">Selesai</SelectItem>
               </SelectContent>
@@ -153,6 +163,7 @@ export default function Page() {
               open={openDialog}
               onOpenChange={setOpenDialog}
               laporan={selectedLaporan}
+              onRefresh={fetchLaporan}
             />
           </div>
         </div>

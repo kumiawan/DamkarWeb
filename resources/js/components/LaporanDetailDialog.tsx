@@ -2,6 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
+import axios from 'axios'
 
 type Laporan = {
   id: number;
@@ -19,10 +20,29 @@ interface LaporanDetailDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   laporan: Laporan | null;
+  onRefresh: () => void;
 }
 
-export default function LaporanDetailDialog({ open, onOpenChange, laporan }: LaporanDetailDialogProps) {
+export default function LaporanDetailDialog({ open, onOpenChange, laporan, onRefresh }: LaporanDetailDialogProps) {
   const [catatan, setCatatan] = useState('');
+
+const handleVerifikasi = async (status: string) => {
+  if (!laporan) return;
+
+  try {
+    const response = await axios.put(`/api/laporan/${laporan.id}`, {
+      status,
+      catatan,
+    });
+
+    console.log('Verifikasi berhasil:', response.data);
+    onOpenChange(false);
+    setCatatan('');
+    onRefresh();
+  } catch (error) {
+    console.error('Gagal memverifikasi:', error);
+  }
+};
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -82,8 +102,22 @@ export default function LaporanDetailDialog({ open, onOpenChange, laporan }: Lap
               </div>
 
               <div className="flex gap-4">
-                <Button className="bg-green-500 hover:bg-green-800">Terima</Button>
-                <Button className="bg-red-500 hover:bg-red-800">Tolak</Button>
+<div className="flex gap-4">
+  <Button
+    className="bg-green-500 hover:bg-green-800"
+    type="button"
+    onClick={() => handleVerifikasi('selesai')}
+  >
+    Terima
+  </Button>
+  <Button
+    className="bg-red-500 hover:bg-red-800"
+    type="button"
+    onClick={() => handleVerifikasi('spam')}
+  >
+    Tolak
+  </Button>
+</div>
               </div>
             </form>
           </div>
