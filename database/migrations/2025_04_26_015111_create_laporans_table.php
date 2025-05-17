@@ -20,7 +20,7 @@ class CreateLaporansTable extends Migration
             $table->string('nama_pelapor');
             $table->string('notlp');
             $table->timestamp('waktu_lapor')->useCurrent();
-            $table->string('status');
+            $table->string('status')->default('menunggu');
             $table->text('catatan')->nullable();
             $table->timestamps();
         });
