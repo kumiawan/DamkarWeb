@@ -11,6 +11,7 @@ type Laporan = {
   nama_pelapor: string;
   notlp: string;
   status: string;
+  waktu_lapor: string;
   foto: string[];
   lat: number;
   lng: number;
@@ -59,6 +60,8 @@ const handleVerifikasi = async (status: string) => {
               <p><strong>Nama Pelapor:</strong> {laporan.nama_pelapor}</p>
               <p><strong>No HP Pelapor:</strong> {laporan.notlp}</p>
               <p><strong>Jenis :</strong> {laporan.jenis_kebakaran}</p>
+              <p><strong>Waktu lapor :</strong> {laporan.waktu_lapor}</p>
+              <p><strong>Status :</strong> {laporan.status}</p>
               <p><strong>Laporan Foto:</strong></p>
               <div className="flex gap-2 overflow-x-auto py-2">
                 {laporan.foto?.length > 0 ? (
