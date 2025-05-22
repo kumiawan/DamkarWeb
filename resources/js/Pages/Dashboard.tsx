@@ -68,7 +68,7 @@ export default function Dashboard(props: DashboardProps) {
 
   // Filter laporans yang statusnya 'menunggu'
   const pendingLaporans = laporans.filter(
-    (laporan) => laporan.status === 'menunggu'
+    (laporan) => laporan.status === 'menunggu',
   );
 
   // Data marker untuk MapView
@@ -162,7 +162,10 @@ export default function Dashboard(props: DashboardProps) {
                           <Button
                             className="bg-white text-black hover:bg-slate-300"
                             onClick={() =>
-                              setSelectedLocation({ lat: laporan.lat, lng: laporan.lng })
+                              setSelectedLocation({
+                                lat: laporan.lat,
+                                lng: laporan.lng,
+                              })
                             }
                           >
                             Cek
@@ -185,19 +188,24 @@ export default function Dashboard(props: DashboardProps) {
                             <strong>ID:</strong> {selectedLaporan.id}
                           </p>
                           <p>
-                            <strong>Lokasi Laporan:</strong> {selectedLaporan.lokasi}
+                            <strong>Lokasi Laporan:</strong>{' '}
+                            {selectedLaporan.lokasi}
                           </p>
                           <p>
-                            <strong>Nama Pelapor:</strong> {selectedLaporan.nama_pelapor}
+                            <strong>Nama Pelapor:</strong>{' '}
+                            {selectedLaporan.nama_pelapor}
                           </p>
                           <p>
-                            <strong>No HP Pelapor:</strong> {selectedLaporan.notlp}
+                            <strong>No HP Pelapor:</strong>{' '}
+                            {selectedLaporan.notlp}
                           </p>
                           <p>
-                            <strong>Jenis:</strong> {selectedLaporan.jenis_kebakaran}
+                            <strong>Jenis:</strong>{' '}
+                            {selectedLaporan.jenis_kebakaran}
                           </p>
                           <p>
-                            <strong>Waktu lapor:</strong> {selectedLaporan.waktu_lapor ?? '-'}
+                            <strong>Waktu lapor:</strong>{' '}
+                            {selectedLaporan.waktu_lapor ?? '-'}
                           </p>
                           <p>
                             <strong>Status :</strong> {selectedLaporan.status}
@@ -207,18 +215,20 @@ export default function Dashboard(props: DashboardProps) {
                           </p>
                           <div className="flex gap-2 overflow-x-auto py-2">
                             {selectedLaporan.foto?.length > 0 ? (
-                              selectedLaporan.foto.map((url: string, index: number) => (
-                                <div
-                                  key={index}
-                                  className="min-w-64 h-64 border rounded overflow-hidden"
-                                >
-                                  <img
-                                    src={url}
-                                    alt={`Foto ${index + 1}`}
-                                    className="w-full h-full object-cover"
-                                  />
-                                </div>
-                              ))
+                              selectedLaporan.foto.map(
+                                (url: string, index: number) => (
+                                  <div
+                                    key={index}
+                                    className="min-w-64 h-64 border rounded overflow-hidden"
+                                  >
+                                    <img
+                                      src={url}
+                                      alt={`Foto ${index + 1}`}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                ),
+                              )
                             ) : (
                               <p className="text-sm text-gray-500">
                                 Tidak ada foto tersedia.
@@ -233,20 +243,30 @@ export default function Dashboard(props: DashboardProps) {
 
                         <form className="space-y-4 mt-4">
                           <p className="text-sm text-gray-700">
-                            Centang daftar kelengkapan data pelapor untuk verifikasi:
+                            Centang daftar kelengkapan data pelapor untuk
+                            verifikasi:
                           </p>
 
                           <div className="flex flex-col space-y-2">
                             <label className="flex items-center gap-2">
-                              <input type="checkbox" className="accent-blue-600" />
+                              <input
+                                type="checkbox"
+                                className="accent-blue-600"
+                              />
                               Lokasi jelas dan lengkap
                             </label>
                             <label className="flex items-center gap-2">
-                              <input type="checkbox" className="accent-blue-600" />
+                              <input
+                                type="checkbox"
+                                className="accent-blue-600"
+                              />
                               Nomor HP pelapor aktif
                             </label>
                             <label className="flex items-center gap-2">
-                              <input type="checkbox" className="accent-blue-600" />
+                              <input
+                                type="checkbox"
+                                className="accent-blue-600"
+                              />
                               Informasi kebakaran masuk akal
                             </label>
                           </div>
@@ -261,7 +281,9 @@ export default function Dashboard(props: DashboardProps) {
                             <Button className="bg-green-500 hover:bg-green-800">
                               Terima
                             </Button>
-                            <Button className="bg-red-500 hover:bg-red-800">Tolak</Button>
+                            <Button className="bg-red-500 hover:bg-red-800">
+                              Tolak
+                            </Button>
                           </div>
                         </form>
                       </div>

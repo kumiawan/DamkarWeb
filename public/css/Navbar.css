@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Navbar menu container */
 .navbar-menu {
@@ -9,19 +9,18 @@
   align-items: center;
   gap: 1rem;
   padding: 0.6rem 1rem;
-  background-color: #ED3237;
+  background-color: #ed3237;
   border-radius: 12px;
   max-width: 900px; /* batasin lebarnya */
   margin: 0 auto; /* tengahin */
 }
-
 
 /* Tombol-tombol dalam navbar */
 .custom-button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: #ED3237;
+  background-color: #ed3237;
   color: white;
   font-size: 1.15rem;
   padding: 0.5rem 0.8rem;
@@ -32,7 +31,7 @@
 }
 
 .custom-button:hover {
-  background-color: #1C1F3A; /* Merah gelap saat hover */
+  background-color: #1c1f3a; /* Merah gelap saat hover */
 }
 
 .custom-button:active {

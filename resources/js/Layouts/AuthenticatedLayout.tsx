@@ -42,18 +42,18 @@ export default function Authenticated({
                 label="Pemantauan"
                 active={route().current('dashboard')}
               />
-<NavLink
-  href="/laporan"
-  icon={
-    <img
-      src="/images/icon/lab_profile.svg"
-      alt="Laporan masuk"
-      className="w-8 h-8"
-    />
-  }
-  label="Laporan Masuk"
-  active={route().current('laporan.page')}
-/>
+              <NavLink
+                href="/laporan"
+                icon={
+                  <img
+                    src="/images/icon/lab_profile.svg"
+                    alt="Laporan masuk"
+                    className="w-8 h-8"
+                  />
+                }
+                label="Laporan Masuk"
+                active={route().current('laporan.page')}
+              />
 
               <NavLink
                 href="#3"

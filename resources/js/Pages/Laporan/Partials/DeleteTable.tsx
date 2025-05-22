@@ -10,7 +10,8 @@ export default function DeleteTable({ id }: DeleteTableProps) {
 
   const handleDelete = () => {
     setLoading(true);
-    axios.delete(`/api/laporan/${id}`)
+    axios
+      .delete(`/api/laporan/${id}`)
       .then(() => {
         setLoading(false);
         alert('Laporan berhasil dihapus');

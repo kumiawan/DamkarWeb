@@ -18,23 +18,23 @@ import LaporanTable from '@/components/LaporanTable';
 import LaporanDetailDialog from '@/components/LaporanDetailDialog';
 import GrafikLaporanPie from '@/components/GrafikLaporanPie';
 import DateRangePicker from '@/components/DateRangePicker';
-import SearchInput from "@/components/SearchInput";
+import SearchInput from '@/components/SearchInput';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { DateRange } from "react-day-picker";
+} from '@/components/ui/select';
+import { DateRange } from 'react-day-picker';
 
 export default function Page() {
   const [laporan, setLaporan] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedLaporan, setSelectedLaporan] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState("menunggu");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('menunggu');
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
 
   const fetchLaporan = async () => {
@@ -49,37 +49,41 @@ export default function Page() {
   };
 
   // Statistik Cepat
-  const totalHariIni = laporan.filter(l =>
-    new Date(l.waktu_lapor).toDateString() === new Date().toDateString()
+  const totalHariIni = laporan.filter(
+    (l) => new Date(l.waktu_lapor).toDateString() === new Date().toDateString(),
   ).length;
 
-  const totalLaporanSelesai = laporan.filter(l =>
-    l.status?.toLowerCase() === 'selesai'
+  const totalLaporanSelesai = laporan.filter(
+    (l) => l.status?.toLowerCase() === 'selesai',
   ).length;
 
-  const totalSpam = laporan.filter(l =>
-    l.status?.toLowerCase() === 'spam'
+  const totalSpam = laporan.filter(
+    (l) => l.status?.toLowerCase() === 'spam',
   ).length;
 
-const filteredLaporan = useMemo(() => {
-  return laporan.filter((laporan) => {
-    const laporanDate = new Date(laporan.waktu_lapor);
-    const matchesSearch = laporan.nama_pelapor.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = statusFilter === "" || laporan.status.toLowerCase() === statusFilter.toLowerCase();
+  const filteredLaporan = useMemo(() => {
+    return laporan.filter((laporan) => {
+      const laporanDate = new Date(laporan.waktu_lapor);
+      const matchesSearch = laporan.nama_pelapor
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+      const matchesStatus =
+        statusFilter === '' ||
+        laporan.status.toLowerCase() === statusFilter.toLowerCase();
 
-const matchesDateRange =
-  !dateRange?.from || !dateRange?.to
-    ? true
-    : (() => {
-        const start = new Date(dateRange.from!);
-        const end = new Date(dateRange.to!);
-        end.setHours(23, 59, 59, 999);
-        return laporanDate >= start && laporanDate <= end;
-      })();
+      const matchesDateRange =
+        !dateRange?.from || !dateRange?.to
+          ? true
+          : (() => {
+              const start = new Date(dateRange.from!);
+              const end = new Date(dateRange.to!);
+              end.setHours(23, 59, 59, 999);
+              return laporanDate >= start && laporanDate <= end;
+            })();
 
-    return matchesSearch && matchesStatus && matchesDateRange;
-  });
-}, [laporan, searchQuery, statusFilter, dateRange]);
+      return matchesSearch && matchesStatus && matchesDateRange;
+    });
+  }, [laporan, searchQuery, statusFilter, dateRange]);
 
   const handleDetailClick = (laporan: any) => {
     setSelectedLaporan(laporan);
@@ -130,7 +134,9 @@ const matchesDateRange =
       <div className="grid md:grid-cols-8">
         {/* Statistik Cepat */}
         <div className="max-h-64 h-64 border rounded-xl m-2 md:col-span-5 p-4">
-          <h2 className="text-lg font-semibold mb-2 text-white">Statistik Cepat</h2>
+          <h2 className="text-lg font-semibold mb-2 text-white">
+            Statistik Cepat
+          </h2>
           <div className="flex items-center justify-around text-white gap-4 h-full">
             <div className="bg-blue-600 p-4 rounded-xl shadow-md text-center">
               <div className="text-xl font-bold">{totalHariIni}</div>
@@ -172,26 +178,30 @@ const matchesDateRange =
           </div>
 
           <div className="md:grid-cols-2">
-<div className="flex gap-2 items-center">
-  <DateRangePicker
-    value={dateRange}
-    onChange={(range) => setDateRange(range)}
-  />
-  <button
-    onClick={() => setDateRange(undefined)}
-    className={`text-white border bg-red-600 rounded px-2 py-1 hover:bg-red-700 transition duration-200 ${
-      dateRange?.from ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-    }`}
-    title="Reset tanggal"
-  >
-    ×
-  </button>
-</div>
+            <div className="flex gap-2 items-center">
+              <DateRangePicker
+                value={dateRange}
+                onChange={(range) => setDateRange(range)}
+              />
+              <button
+                onClick={() => setDateRange(undefined)}
+                className={`text-white border bg-red-600 rounded px-2 py-1 hover:bg-red-700 transition duration-200 ${
+                  dateRange?.from
+                    ? 'opacity-100 pointer-events-auto'
+                    : 'opacity-0 pointer-events-none'
+                }`}
+                title="Reset tanggal"
+              >
+                ×
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Placeholder Nav */}
-        <div className="max-h-16 h-16 bg-cyan-300 md:col-span-8 hidden">Nav</div>
+        <div className="max-h-16 h-16 bg-cyan-300 md:col-span-8 hidden">
+          Nav
+        </div>
 
         {/* Table Laporan */}
         <div className="h-full min-h-screen border rounded-xl m-2 md:col-span-8 flex flex-col">

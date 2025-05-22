@@ -1,10 +1,14 @@
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { DateRange } from "react-day-picker";
-import { useState } from "react";
+import { Calendar } from '@/components/ui/calendar';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { Button } from '@/components/ui/button';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
+import { DateRange } from 'react-day-picker';
+import { useState } from 'react';
 
 export default function DateRangePicker({
   onChange,
@@ -30,11 +34,11 @@ export default function DateRangePicker({
           {value?.from ? (
             value.to ? (
               <>
-                {format(value.from, "dd MMM yyyy")} -{" "}
-                {format(value.to, "dd MMM yyyy")}
+                {format(value.from, 'dd MMM yyyy')} -{' '}
+                {format(value.to, 'dd MMM yyyy')}
               </>
             ) : (
-              format(value.from, "dd MMM yyyy")
+              format(value.from, 'dd MMM yyyy')
             )
           ) : (
             <span>Pilih rentang tanggal</span>

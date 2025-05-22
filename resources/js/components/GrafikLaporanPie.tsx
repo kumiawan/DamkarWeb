@@ -10,9 +10,9 @@ interface Props {
 
 // Mapping warna berdasarkan jenis kebakaran
 const warnaJenis: Record<string, string> = {
-  Kebakaran: '#ff0000',     // merah
-  Edukasi: '#00ffff',       // biru
-  Penyelamatan: '#ffff00',  // kuning
+  Kebakaran: '#ff0000', // merah
+  Edukasi: '#00ffff', // biru
+  Penyelamatan: '#ffff00', // kuning
 };
 
 export default function GrafikLaporanPie({ laporans }: Props) {
@@ -22,7 +22,10 @@ export default function GrafikLaporanPie({ laporans }: Props) {
     jenisMap[item.jenis_kebakaran] = (jenisMap[item.jenis_kebakaran] || 0) + 1;
   });
 
-  const data = Object.entries(jenisMap).map(([name, value]) => ({ name, value }));
+  const data = Object.entries(jenisMap).map(([name, value]) => ({
+    name,
+    value,
+  }));
 
   return (
     <PieChart width={400} height={200}>
