@@ -34,7 +34,7 @@ class LaporanController extends Controller
             'nama_pelapor' => $req->nama_pelapor,
             'notlp' => $req->notlp,
             'status' => $req->status ?? 'menunggu',
-            'catatan' => $reg->catatan,
+            'catatan' => $req->catatan,
         ]);
 
         return response()->json($laporan, 201);

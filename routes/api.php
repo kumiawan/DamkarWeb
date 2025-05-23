@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\LaporanMobileController;
+use App\Http\Controllers\Api\RegisterMobileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LaporanController;
@@ -31,3 +34,13 @@ Route::get('/weather', function (Request $request) {
 
     return $response->json();
 });
+
+
+
+// api mobile
+
+Route::post('/register', [RegisterMobileController::class, 'register']);
+
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/laporan', [LaporanMobileController::class, 'store']);
