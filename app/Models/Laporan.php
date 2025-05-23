@@ -18,5 +18,10 @@ class Laporan extends Model
         'notlp',
         'status',
         'catatan',
+        'foto',
+    ];
+
+    protected $casts = [
+        'foto' => 'array',
     ];
 }
