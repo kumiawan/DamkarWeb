@@ -18,16 +18,8 @@ export default function CreateModal({ open, onClose }: CreateModalProps) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('judul', data.judul);
-    formData.append('penulis', data.penulis);
-    formData.append('isi', data.isi);
-    if (data.foto) {
-      formData.append('foto', data.foto);
-    }
 
     post('/berita', {
-      data: formData,
       forceFormData: true,
       onSuccess: () => {
         reset();
@@ -78,7 +70,9 @@ export default function CreateModal({ open, onClose }: CreateModalProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Foto (opsional)</label>
+              <label className="block text-sm font-medium mb-1">
+                Foto (opsional)
+              </label>
               <input
                 type="file"
                 accept="image/*"
@@ -98,9 +92,9 @@ export default function CreateModal({ open, onClose }: CreateModalProps) {
                 Batal
               </Button>
               <Button
-              type="submit"
-              disabled={processing}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-800"
+                type="submit"
+                disabled={processing}
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-800"
               >
                 Simpan
               </Button>

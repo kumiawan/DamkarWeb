@@ -66,37 +66,55 @@ export default function LaporanDetailDialog({
           <div className="space-y-6">
             {/* Informasi Laporan */}
             <div className="space-y-2 text-sm text-gray-800 border-b pb-4">
-              <p><strong>ID:</strong> {laporan.id}</p>
-              <p><strong>Lokasi:</strong> {laporan.lokasi}</p>
-              <p><strong>Nama Pelapor:</strong> {laporan.nama_pelapor}</p>
-              <p><strong>No HP:</strong> {laporan.notlp}</p>
-              <p><strong>Jenis Kebakaran:</strong> {laporan.jenis_kebakaran}</p>
-              <p><strong>Waktu Lapor:</strong> {laporan.waktu_lapor}</p>
-              <p><strong>Status:</strong> {laporan.status}</p>
+              <p>
+                <strong>ID:</strong> {laporan.id}
+              </p>
+              <p>
+                <strong>Lokasi:</strong> {laporan.lokasi}
+              </p>
+              <p>
+                <strong>Nama Pelapor:</strong> {laporan.nama_pelapor}
+              </p>
+              <p>
+                <strong>No HP:</strong> {laporan.notlp}
+              </p>
+              <p>
+                <strong>Jenis Kebakaran:</strong> {laporan.jenis_kebakaran}
+              </p>
+              <p>
+                <strong>Waktu Lapor:</strong> {laporan.waktu_lapor}
+              </p>
+              <p>
+                <strong>Status:</strong> {laporan.status}
+              </p>
             </div>
 
             <div>
-            <p className="text-sm font-medium text-gray-700 mb-2">Foto Laporan:</p>
-            <div className="w-96 overflow-x-auto">
-            <div className="flex gap-3 w-max pb-2">
-            {laporan.foto?.length > 0 ? (
-                laporan.foto.map((url, index) => (
-                    <div
-                    key={index}
-                    className="w-64 flex-shrink-0 aspect-video bg-gray-100 border rounded flex items-center justify-center overflow-hidden"
-                    >
-                    <img
-                    src={`/${url}`}
-                    alt={`Foto ${index + 1}`}
-                    className="w-full h-full object-contain"
-                    />
-                    </div>
-                ))
-            ) : (
-            <p className="text-sm text-gray-500">Tidak ada foto tersedia.</p>
-            )}
-            </div>
-            </div>
+              <p className="text-sm font-medium text-gray-700 mb-2">
+                Foto Laporan:
+              </p>
+              <div className="w-96 overflow-x-auto">
+                <div className="flex gap-3 w-max pb-2">
+                  {laporan.foto?.length > 0 ? (
+                    laporan.foto.map((url, index) => (
+                      <div
+                        key={index}
+                        className="w-64 flex-shrink-0 aspect-video bg-gray-100 border rounded flex items-center justify-center overflow-hidden"
+                      >
+                        <img
+                          src={`/${url}`}
+                          alt={`Foto ${index + 1}`}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-sm text-gray-500">
+                      Tidak ada foto tersedia.
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
 
             {/* Verifikasi Form */}
@@ -124,7 +142,9 @@ export default function LaporanDetailDialog({
               </div>
 
               <div>
-                <p className="text-sm font-medium text-gray-700 mb-1">Catatan Verifikasi:</p>
+                <p className="text-sm font-medium text-gray-700 mb-1">
+                  Catatan Verifikasi:
+                </p>
                 <Textarea
                   value={catatan}
                   onChange={(e) => setCatatan(e.target.value)}

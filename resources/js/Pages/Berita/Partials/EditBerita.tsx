@@ -28,7 +28,7 @@ export default function EditBerita({
         judul: berita.judul,
         penulis: berita.penulis,
         isi: berita.isi,
-        foto: null, // tidak isi gambar awal karena bukan file
+        foto: null,
       });
     }
   }, [berita]);
@@ -57,10 +57,16 @@ export default function EditBerita({
   if (!berita) return null;
 
   return (
-    <Dialog open={isOpen} onClose={onClose} className="fixed inset-0 z-50 overflow-y-auto">
+    <Dialog
+      open={isOpen}
+      onClose={onClose}
+      className="fixed inset-0 z-50 overflow-y-auto"
+    >
       <div className="flex items-center justify-center min-h-screen bg-black/30 p-4">
         <Dialog.Panel className="bg-white p-6 rounded shadow max-w-md w-full">
-          <Dialog.Title className="text-lg font-semibold mb-4">Edit Berita</Dialog.Title>
+          <Dialog.Title className="text-lg font-semibold mb-4">
+            Edit Berita
+          </Dialog.Title>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium">Judul</label>
@@ -70,7 +76,9 @@ export default function EditBerita({
                 onChange={(e) => setData('judul', e.target.value)}
                 className="w-full border rounded px-3 py-2"
               />
-              {errors.judul && <p className="text-sm text-red-500">{errors.judul}</p>}
+              {errors.judul && (
+                <p className="text-sm text-red-500">{errors.judul}</p>
+              )}
             </div>
 
             <div>
@@ -81,7 +89,9 @@ export default function EditBerita({
                 onChange={(e) => setData('penulis', e.target.value)}
                 className="w-full border rounded px-3 py-2"
               />
-              {errors.penulis && <p className="text-sm text-red-500">{errors.penulis}</p>}
+              {errors.penulis && (
+                <p className="text-sm text-red-500">{errors.penulis}</p>
+              )}
             </div>
 
             <div>
@@ -92,11 +102,15 @@ export default function EditBerita({
                 className="w-full border rounded px-3 py-2"
                 rows={4}
               />
-              {errors.isi && <p className="text-sm text-red-500">{errors.isi}</p>}
+              {errors.isi && (
+                <p className="text-sm text-red-500">{errors.isi}</p>
+              )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium">Ganti Foto (opsional)</label>
+              <label className="block text-sm font-medium">
+                Ganti Foto (opsional)
+              </label>
               <input
                 type="file"
                 accept="image/*"
@@ -107,7 +121,9 @@ export default function EditBerita({
                   Menggunakan foto lama jika tidak memilih foto baru.
                 </p>
               )}
-              {errors.foto && <p className="text-sm text-red-500">{errors.foto}</p>}
+              {errors.foto && (
+                <p className="text-sm text-red-500">{errors.foto}</p>
+              )}
             </div>
 
             <div className="flex justify-end gap-2 pt-4">

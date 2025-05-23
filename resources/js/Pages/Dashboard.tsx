@@ -213,28 +213,30 @@ export default function Dashboard(props: DashboardProps) {
                           <p>
                             <strong>Laporan Foto:</strong>
                           </p>
-            <div>
-            <div className="w-96 overflow-x-auto">
-            <div className="flex gap-3 w-max pb-2">
-            {selectedLaporan.foto?.length > 0 ? (
-                selectedLaporan.foto.map((url, index) => (
-                    <div
-                    key={index}
-                    className="w-64 flex-shrink-0 aspect-video bg-gray-100 border rounded flex items-center justify-center overflow-hidden"
-                    >
-                    <img
-                    src={`/${url}`}
-                    alt={`Foto ${index + 1}`}
-                    className="w-full h-full object-contain"
-                    />
-                    </div>
-                ))
-            ) : (
-            <p className="text-sm text-gray-500">Tidak ada foto tersedia.</p>
-            )}
-            </div>
-            </div>
-            </div>
+                          <div>
+                            <div className="w-96 overflow-x-auto">
+                              <div className="flex gap-3 w-max pb-2">
+                                {selectedLaporan.foto?.length > 0 ? (
+                                  selectedLaporan.foto.map((url, index) => (
+                                    <div
+                                      key={index}
+                                      className="w-64 flex-shrink-0 aspect-video bg-gray-100 border rounded flex items-center justify-center overflow-hidden"
+                                    >
+                                      <img
+                                        src={`/${url}`}
+                                        alt={`Foto ${index + 1}`}
+                                        className="w-full h-full object-contain"
+                                      />
+                                    </div>
+                                  ))
+                                ) : (
+                                  <p className="text-sm text-gray-500">
+                                    Tidak ada foto tersedia.
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          </div>
                         </div>
 
                         <DialogHeader>

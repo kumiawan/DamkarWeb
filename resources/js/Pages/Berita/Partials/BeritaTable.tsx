@@ -33,43 +33,43 @@ export default function BeritaTable({
           <TableHead>Aksi</TableHead>
         </TableRow>
       </TableHeader>
-<TableBody>
-  {data.map((berita) => (
-    <TableRow key={berita.id}>
-      <TableCell className="font-medium">{berita.id}</TableCell>
-      <TableCell>
-        <div>
-          {berita.foto && (
-            <img
-              src={`/storage/${berita.foto}`}
-              className="w-20 mt-1 rounded"
-            />
-          )}
-        </div>
-      </TableCell>
-      <TableCell> {berita.judul} </TableCell>
-      <TableCell>{berita.penulis}</TableCell>
-      <TableCell>
-        {new Date(berita.created_at || '').toLocaleDateString('id-ID', {
-          day: '2-digit',
-          month: 'long',
-          year: 'numeric',
-        })}
-      </TableCell>
-      <TableCell className="space-x-2">
-        <Button
-          className="bg-white text-black hover:bg-slate-300"
-          onClick={() => onEdit(berita)}
-        >
-          Edit
-        </Button>
-        <Button variant="destructive" onClick={() => onDelete(berita.id)}>
-          Delete
-        </Button>
-      </TableCell>
-    </TableRow>
-  ))}
-</TableBody>
+      <TableBody>
+        {data.map((berita) => (
+          <TableRow key={berita.id}>
+            <TableCell className="font-medium">{berita.id}</TableCell>
+            <TableCell>
+              <div>
+                {berita.foto && (
+                  <img
+                    src={`/storage/${berita.foto}`}
+                    className="w-20 mt-1 rounded"
+                  />
+                )}
+              </div>
+            </TableCell>
+            <TableCell> {berita.judul} </TableCell>
+            <TableCell>{berita.penulis}</TableCell>
+            <TableCell>
+              {new Date(berita.created_at || '').toLocaleDateString('id-ID', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+              })}
+            </TableCell>
+            <TableCell className="space-x-2">
+              <Button
+                className="bg-white text-black hover:bg-slate-300"
+                onClick={() => onEdit(berita)}
+              >
+                Edit
+              </Button>
+              <Button variant="destructive" onClick={() => onDelete(berita.id)}>
+                Delete
+              </Button>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
     </Table>
   );
 }
