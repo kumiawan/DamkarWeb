@@ -17,15 +17,15 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@damkar.id',
-                'notlp' => '082122119',
+                'notlp' => '08998765431',
             'password' => bcrypt('admin+damkar'),
             'role' => 'admin',
         ]);
 
         User::factory()->create([
-            'name' => 'admin',
+            'name' => 'user',
             'email' => 'user@damkar.id',
-                'notlp' => '082122119',
+                'notlp' => '0823456789',
             'password' => bcrypt('user+damkar'),
             'role' => 'user',
         ]);

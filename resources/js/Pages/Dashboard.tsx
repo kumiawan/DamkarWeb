@@ -1,15 +1,33 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from '@/components/ui/card';
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, } from '@/components/ui/table';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import MapView from '@/components/ui/MapView';
 import WeatherWidget from '@/components/ui/WeatherWidget';
-import { useState, useEffect} from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, } from '@/components/ui/dialog'
-import Checkbox from '@/components/Checkbox';
+import { useState, useEffect } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
-
 
 type Laporan = {
   id: number;
@@ -21,47 +39,58 @@ type Laporan = {
   foto: string[];
   lat: number;
   lng: number;
+  waktu_lapor: string;
 };
+
 interface DashboardProps {
   laporans: Laporan[];
 }
 
 export default function Dashboard(props: DashboardProps) {
+  const [laporans, setLaporans] = useState<Laporan[]>(props.laporans);
 
-const [laporans, setLaporans] = useState<Laporan[]>(props.laporans);
-    useEffect(() => {
-    let isMounted = true ;
-      const fetchLaporans = async () => {
-          const response = await fetch('/api/laporan');
-          const data = await response.json()
-          setLaporans(data);
-      };
+  useEffect(() => {
+    let isMounted = true;
+    const fetchLaporans = async () => {
+      const response = await fetch('/api/laporan');
+      const data = await response.json();
+      if (isMounted) setLaporans(data);
+    };
 
-      fetchLaporans();
-      const interval = setInterval(fetchLaporans, 30000);
+    fetchLaporans();
+    const interval = setInterval(fetchLaporans, 30000);
 
-  return () => {
-    isMounted = false;
-    clearInterval(interval);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, []);
+
+  // Filter laporans yang statusnya 'menunggu'
+  const pendingLaporans = laporans.filter(
+    (laporan) => laporan.status === 'menunggu',
+  );
+
+  // Data marker untuk MapView
+  const markers = pendingLaporans.map((laporan) => ({
+    lat: laporan.lat,
+    lng: laporan.lng,
+    jenis: laporan.jenis_kebakaran,
+  }));
+
+  const [selectedLocation, setSelectedLocation] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
+
+  const [open, setOpen] = useState(false);
+  const [selectedLaporan, setSelectedLaporan] = useState<Laporan | null>(null);
+
+  const handleOpenModal = (laporan: Laporan) => {
+    setSelectedLaporan(laporan);
+    setOpen(true);
   };
-    }, []);
 
-
-const markers = laporans.map((laporan) => ({
-  lat: laporan.lat,
-  lng: laporan.lng,
-  jenis: laporan.jenis_kebakaran,
-}));
-
-const [selectedLocation, setSelectedLocation] = useState<{lat: number; lng:number} | null >(null)
-
-const [open, setOpen] = useState(false)
-const [selectedLaporan, setSelectedLaporan] = useState<Laporan | null>(null)
-
-const handleOpenModal = (laporan: Laporan) => {
-  setSelectedLaporan(laporan)
-  setOpen(true)
-}
   return (
     <AuthenticatedLayout
       header={
@@ -79,7 +108,7 @@ const handleOpenModal = (laporan: Laporan) => {
 
       <div className="grid md:grid-cols-4">
         <div className="max-h-80 md:col-span-3 bg-oren border rounded rounded-lg border-blue-600 m-2">
-          <MapView markers={markers} selectedLocation={selectedLocation}/>
+          <MapView markers={markers} selectedLocation={selectedLocation} />
         </div>
 
         <div className="flex bg-gradient-to-b from-birudongker to-birutuek items-center justify-center max-h-80 border rounded rounded-lg border-blue-600 m-2">
@@ -101,6 +130,7 @@ const handleOpenModal = (laporan: Laporan) => {
                       <TableHead>Nama Pelapor</TableHead>
                       <TableHead>No HP Pelapor</TableHead>
                       <TableHead>Jenis</TableHead>
+                      <TableHead>Status</TableHead>
                       <TableHead>Aksi</TableHead>
                       <TableHead>Lihat di Peta</TableHead>
                     </TableRow>
@@ -110,7 +140,7 @@ const handleOpenModal = (laporan: Laporan) => {
               <div className="max-h-64 overflow-y-auto">
                 <Table>
                   <TableBody>
-                    {laporans.map((laporan) => (
+                    {pendingLaporans.map((laporan) => (
                       <TableRow key={laporan.id}>
                         <TableCell className="font-medium w-16">
                           {laporan.id}
@@ -119,19 +149,24 @@ const handleOpenModal = (laporan: Laporan) => {
                         <TableCell>{laporan.nama_pelapor}</TableCell>
                         <TableCell>{laporan.notlp}</TableCell>
                         <TableCell>{laporan.jenis_kebakaran}</TableCell>
+                        <TableCell>{laporan.status}</TableCell>
                         <TableCell>
-                        <Button
-                        className="bg-white text-black hover:bg-slate-300"
+                          <Button
+                            className="bg-white text-black hover:bg-slate-300"
                             onClick={() => handleOpenModal(laporan)}
                           >
                             Lihat Detail
                           </Button>
-
-                          </TableCell>
+                        </TableCell>
                         <TableCell>
-                        <Button
-                        className="bg-white text-black hover:bg-slate-300"
-                            onClick={() => setSelectedLocation({ lat:laporan.lat, lng:laporan.lng})}
+                          <Button
+                            className="bg-white text-black hover:bg-slate-300"
+                            onClick={() =>
+                              setSelectedLocation({
+                                lat: laporan.lat,
+                                lng: laporan.lng,
+                              })
+                            }
                           >
                             Cek
                           </Button>
@@ -142,82 +177,127 @@ const handleOpenModal = (laporan: Laporan) => {
                 </Table>
 
                 <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent>
-                <DialogHeader>
-                <DialogTitle>Detail Laporan</DialogTitle>
-                </DialogHeader>
-                {selectedLaporan ? (
-                    <div className="space-y-2">
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Detail Laporan</DialogTitle>
+                    </DialogHeader>
+                    {selectedLaporan ? (
+                      <div className="space-y-2">
+                        <div className="border-b p-4">
+                          <p>
+                            <strong>ID:</strong> {selectedLaporan.id}
+                          </p>
+                          <p>
+                            <strong>Lokasi Laporan:</strong>{' '}
+                            {selectedLaporan.lokasi}
+                          </p>
+                          <p>
+                            <strong>Nama Pelapor:</strong>{' '}
+                            {selectedLaporan.nama_pelapor}
+                          </p>
+                          <p>
+                            <strong>No HP Pelapor:</strong>{' '}
+                            {selectedLaporan.notlp}
+                          </p>
+                          <p>
+                            <strong>Jenis:</strong>{' '}
+                            {selectedLaporan.jenis_kebakaran}
+                          </p>
+                          <p>
+                            <strong>Waktu lapor:</strong>{' '}
+                            {selectedLaporan.waktu_lapor ?? '-'}
+                          </p>
+                          <p>
+                            <strong>Status :</strong> {selectedLaporan.status}
+                          </p>
+                          <p>
+                            <strong>Laporan Foto:</strong>
+                          </p>
+                          <div className="flex gap-2 overflow-x-auto py-2">
+                            {selectedLaporan.foto?.length > 0 ? (
+                              selectedLaporan.foto.map(
+                                (url: string, index: number) => (
+                                  <div
+                                    key={index}
+                                    className="min-w-64 h-64 border rounded overflow-hidden"
+                                  >
+                                    <img
+                                      src={url}
+                                      alt={`Foto ${index + 1}`}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                ),
+                              )
+                            ) : (
+                              <p className="text-sm text-gray-500">
+                                Tidak ada foto tersedia.
+                              </p>
+                            )}
+                          </div>
+                        </div>
 
-                    <div className="border-b p-4">
-                    <p><strong>ID:</strong> {selectedLaporan.id}</p>
-                    <p><strong>Lokasi Laporan:</strong> {selectedLaporan.lokasi}</p>
-                    <p><strong>Nama Pelapor:</strong> {selectedLaporan.nama_pelapor}</p>
-                    <p><strong>No HP Pelapor:</strong> {selectedLaporan.notlp}</p>
-                    <p><strong>Jenis:</strong> {selectedLaporan.jenis_kebakaran}</p>
-                    <p><strong>Laporan Foto:</strong> </p>
-                    <div className="flex gap-2 overflow-x-auto py-2">
-                    {selectedLaporan.foto?.length > 0 ? (
-                        selectedLaporan.foto.map((url: string, index: number) => (
-                            <div key={index} className="min-w-64 h-64 border rounded overflow-hidden">
-                            <img
-                            src={url}
-                            alt={`Foto ${index + 1}`}
-                            className="w-full h-full object-cover"
-                            />
-                            </div>
-                        ))
+                        <DialogHeader>
+                          <DialogTitle>Verifikasi Laporan</DialogTitle>
+                        </DialogHeader>
+
+                        <form className="space-y-4 mt-4">
+                          <p className="text-sm text-gray-700">
+                            Centang daftar kelengkapan data pelapor untuk
+                            verifikasi:
+                          </p>
+
+                          <div className="flex flex-col space-y-2">
+                            <label className="flex items-center gap-2">
+                              <input
+                                type="checkbox"
+                                className="accent-blue-600"
+                              />
+                              Lokasi jelas dan lengkap
+                            </label>
+                            <label className="flex items-center gap-2">
+                              <input
+                                type="checkbox"
+                                className="accent-blue-600"
+                              />
+                              Nomor HP pelapor aktif
+                            </label>
+                            <label className="flex items-center gap-2">
+                              <input
+                                type="checkbox"
+                                className="accent-blue-600"
+                              />
+                              Informasi kebakaran masuk akal
+                            </label>
+                          </div>
+
+                          <div className="mt-4">
+                            <p className="text-sm font-medium text-gray-700 mb-2">
+                              Catatan Verifikasi:
+                            </p>
+                            <Textarea />
+                          </div>
+                          <div className="flex gap-4">
+                            <Button className="bg-green-500 hover:bg-green-800">
+                              Terima
+                            </Button>
+                            <Button className="bg-red-500 hover:bg-red-800">
+                              Tolak
+                            </Button>
+                          </div>
+                        </form>
+                      </div>
                     ) : (
-                    <p className="text-sm text-gray-500">Tidak ada foto tersedia.</p>
+                      <p>Memuat data...</p>
                     )}
-                    </div>
-                    </div>
-
-                <DialogHeader>
-                <DialogTitle>Verifikasi Laporan</DialogTitle>
-                </DialogHeader>
-
-<form className="space-y-4 mt-4">
-  <p className="text-sm text-gray-700">
-    Centang daftar kelengkapan data pelapor untuk verifikasi:
-  </p>
-
-  <div className="flex flex-col space-y-2">
-    <label className="flex items-center gap-2">
-      <input type="checkbox" className="accent-blue-600" />
-      Lokasi jelas dan lengkap
-    </label>
-    <label className="flex items-center gap-2">
-      <input type="checkbox" className="accent-blue-600" />
-      Nomor HP pelapor aktif
-    </label>
-    <label className="flex items-center gap-2">
-      <input type="checkbox" className="accent-blue-600" />
-      Informasi kebakaran masuk akal
-    </label>
-  </div>
-
-  <div className="mt-4">
-    <p className="text-sm font-medium text-gray-700 mb-2">Catatan Verifikasi:</p>
-    <Textarea/>
-  </div>
-  <div className="flex gap-4">
-    <Button className="bg-green-500 hover:bg-green-800"> Terima </Button>
-    <Button className="bg-red-500 hover:bg-red-800"> Tolak </Button>
-  </div>
-</form>
-
-                    </div>
-                ) : (
-                <p>Memuat data...</p>
-                )}
-                </DialogContent>
+                  </DialogContent>
                 </Dialog>
-
               </div>
             </div>
           </div>
         </div>
+
+        {/* Bagian Status Tim (hidden) */}
         <div className="hidden p-2 border rounded rounded-lg border-blue-600 m-2 bg-gradient-to-b from-birudongker to-birutuek ">
           <h3 className="text-lg font-bold mb-4 text-white">Status Tim</h3>
           <div>

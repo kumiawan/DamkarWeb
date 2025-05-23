@@ -46,4 +46,21 @@ class LaporanController extends Controller
         return response()->json($laporan,200);
     }
 
+
+    public function update(Request $request, $id)
+    {
+        $laporan = Laporan::findOrFail($id);
+
+        $request->validate([
+            'status' => 'required|string|max:50',
+            'catatan' => 'nullable|string|max:255',
+        ]);
+
+        $laporan->status = $request->status;
+        $laporan->catatan = $request->catatan;
+        $laporan->save();
+
+        return response()->json($laporan);
+    }
+
 }

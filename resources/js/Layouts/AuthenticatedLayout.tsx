@@ -42,31 +42,30 @@ export default function Authenticated({
                 label="Pemantauan"
                 active={route().current('dashboard')}
               />
-<NavLink
-  href="/laporan"
-  icon={
-    <img
-      src="/images/icon/lab_profile.svg"
-      alt="Laporan masuk"
-      className="w-8 h-8"
-    />
-  }
-  label="Laporan Masuk"
-  active={route().current('laporan.page')}
-/>
-
               <NavLink
-                href="#3"
-                className="hidden"
+                href="/laporan"
                 icon={
                   <img
-                    src="/images/icon/map.svg"
-                    alt="map"
+                    src="/images/icon/lab_profile.svg"
+                    alt="Laporan masuk"
                     className="w-8 h-8"
                   />
                 }
-                label="Peta & Navigasi"
-                active={route().current('#map')}
+                label="Laporan Masuk"
+                active={route().current('laporan.page')}
+              />
+
+              <NavLink
+                href="/berita"
+                icon={
+                  <img
+                    src="/images/icon/map.svg"
+                    alt="berita"
+                    className="w-8 h-8"
+                  />
+                }
+                label="Berita"
+                active={route().current('berita')}
               />
               <NavLink
                 href="/profile"

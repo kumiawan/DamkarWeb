@@ -25,7 +25,11 @@ type MapViewProps = {
   selectedLocation: { lat: number; lng: number } | null;
 };
 
-function FlyToLocation({ selectedLocation }: { selectedLocation: { lat: number; lng: number } | null }) {
+function FlyToLocation({
+  selectedLocation,
+}: {
+  selectedLocation: { lat: number; lng: number } | null;
+}) {
   const map = useMap();
 
   useEffect(() => {

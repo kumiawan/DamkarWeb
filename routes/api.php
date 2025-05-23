@@ -7,14 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LaporanController;
 
-Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
-    Route::get('/user/profile', [Api\UserController::class, 'profile']);
-    // Tambahkan endpoint lain khusus mobile user
-});
 
+/* TODO: tambahkan sanctum agar tidak ter-ekspose ke publik */
 Route::post('/laporan', [LaporanController::class, 'create']);
 Route::get('/laporan', [LaporanController::class, 'index']);
 Route::get('/laporan/{id}', [LaporanController::class, 'show']);
+Route::put('/laporan/{id}', [LaporanController::class, 'update']);
 
 
 Route::get('/weather', function (Request $request) {
