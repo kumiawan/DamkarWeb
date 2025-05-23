@@ -56,17 +56,16 @@ export default function Authenticated({
               />
 
               <NavLink
-                href="#3"
-                className="hidden"
+                href="/berita"
                 icon={
                   <img
                     src="/images/icon/map.svg"
-                    alt="map"
+                    alt="berita"
                     className="w-8 h-8"
                   />
                 }
-                label="Peta & Navigasi"
-                active={route().current('#map')}
+                label="Berita"
+                active={route().current('berita')}
               />
               <NavLink
                 href="/profile"

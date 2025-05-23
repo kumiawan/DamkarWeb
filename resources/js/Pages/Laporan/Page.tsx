@@ -128,7 +128,13 @@ export default function Page() {
   }
 
   return (
-    <AuthenticatedLayout>
+    <AuthenticatedLayout
+      header={
+        <h2 className="text-xl underline underline-offset-8 decoration-2 decoration-red-600 font-semibold text-white">
+          Laporan Masuk
+        </h2>
+      }
+    >
       <Head title="Laporan Masuk" />
 
       <div className="grid md:grid-cols-8">

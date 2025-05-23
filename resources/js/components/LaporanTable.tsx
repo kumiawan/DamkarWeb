@@ -1,4 +1,3 @@
-// components/LaporanTable.tsx
 import {
   Table,
   TableBody,

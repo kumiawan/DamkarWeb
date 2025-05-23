@@ -4,10 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LaporanController;
 
-Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
-    // Tambahkan endpoint lain khusus mobile user
-});
 
+/* TODO: tambahkan sanctum agar tidak ter-ekspose ke publik */
 Route::post('/laporan', [LaporanController::class, 'create']);
 Route::get('/laporan', [LaporanController::class, 'index']);
 Route::get('/laporan/{id}', [LaporanController::class, 'show']);

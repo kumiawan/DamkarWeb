@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PemantauanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BeritaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,6 +22,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/laporan', function () {
         return Inertia::render('Laporan/Page');
     })->name('laporan.page');
+
+    Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
+    Route::get('/berita/create', [BeritaController::class, 'create'])->name('berita.create');
+    Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');
+    Route::put('/berita/{id}', [BeritaController::class, 'update'])->name('berita.update');
+    Route::delete('/berita/{id}', [BeritaController::class, 'destroy'])->name('berita.destroy');
 });
 
 require __DIR__.'/auth.php';
