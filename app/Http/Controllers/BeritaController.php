@@ -28,30 +28,47 @@ class BeritaController extends Controller
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
             'penulis' => 'required|string|max:100',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        $fotoPath = null;
+        if ($request->hasFile('foto')) {
+            $fotoPath = $request->file('foto')->store('berita', 'public');
+        }
 
         Berita::create([
             'judul' => $request->judul,
             'isi' => $request->isi,
             'penulis' => $request->penulis,
+            'foto'=> $fotoPath,
         ]);
 
         return redirect('/berita')->with('message', 'Berita berhasil ditambahkan.');
     }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'judul' => 'required|string|max:255',
-            'isi' => 'required|string',
-            'penulis' => 'required|string|max:100',
-        ]);
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'judul' => 'required|string|max:255',
+        'isi' => 'required|string',
+        'penulis' => 'required|string|max:100',
+        'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
 
-        $berita = Berita::findOrFail($id);
-        $berita->update($request->only('judul', 'isi', 'penulis'));
+    $berita = Berita::findOrFail($id);
 
-        return redirect()->back()->with('message', 'Berita berhasil diperbarui.');
+    if ($request->hasFile('foto')) {
+        $fotoPath = $request->file('foto')->store('berita', 'public');
+        $berita->foto = $fotoPath;
     }
+
+    $berita->judul = $request->input('judul');
+    $berita->isi = $request->input('isi');
+    $berita->penulis = $request->input('penulis');
+
+    $berita->save();
+
+    return redirect()->back()->with('message', 'Berita berhasil diperbarui.');
+}
 
     public function destroy($id)
     {

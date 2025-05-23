@@ -16,6 +16,7 @@ return new class extends Migration
                $table->string('judul');
                $table->text('isi');
                $table->string('penulis');
+               $table->string('foto');
                $table->timestamps();
         });
     }

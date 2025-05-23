@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Berita extends Model
 {
     use HasFactory;
-    protected $fillable = ['judul', 'penulis', 'isi'];
+    protected $fillable = ['judul', 'penulis', 'isi', 'foto'];
 }

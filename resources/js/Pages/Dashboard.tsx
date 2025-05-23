@@ -214,7 +214,6 @@ export default function Dashboard(props: DashboardProps) {
                             <strong>Laporan Foto:</strong>
                           </p>
             <div>
-            <p className="text-sm font-medium text-gray-700 mb-2">Foto Laporan:</p>
             <div className="w-96 overflow-x-auto">
             <div className="flex gap-3 w-max pb-2">
             {selectedLaporan.foto?.length > 0 ? (
