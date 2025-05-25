@@ -37,8 +37,14 @@ Route::get('/weather', function (Request $request) {
 
 // api mobile
 
-Route::post('/register', [RegisterMobileController::class, 'register']);
+Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::post('/laporan', [LaporanMobileController::class, 'store']);
+#Route::post('/laporan', [LaporanMobileController::class, 'store']);
+
+Route::post('change-password', [AuthController::class, 'changePassword']);
+
+Route::post('update-user', [AuthController::class, 'update']);
+
+Route::post('validate-old-password', [AuthController::class, 'validateOldPassword']);
