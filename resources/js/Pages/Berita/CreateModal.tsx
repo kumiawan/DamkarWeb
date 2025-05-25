@@ -13,11 +13,14 @@ export default function CreateModal({ open, onClose }: CreateModalProps) {
     judul: '',
     penulis: '',
     isi: '',
+    foto: null as File | null,
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     post('/berita', {
+      forceFormData: true,
       onSuccess: () => {
         reset();
         onClose();
@@ -42,9 +45,7 @@ export default function CreateModal({ open, onClose }: CreateModalProps) {
               <input
                 type="text"
                 value={data.judul}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setData('judul', e.target.value)
-                }
+                onChange={(e) => setData('judul', e.target.value)}
                 className="w-full border rounded px-3 py-2"
                 required
               />
@@ -54,9 +55,7 @@ export default function CreateModal({ open, onClose }: CreateModalProps) {
               <input
                 type="text"
                 value={data.penulis}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setData('penulis', e.target.value)
-                }
+                onChange={(e) => setData('penulis', e.target.value)}
                 className="w-full border rounded px-3 py-2"
                 required
               />
@@ -65,11 +64,20 @@ export default function CreateModal({ open, onClose }: CreateModalProps) {
               <label className="block text-sm font-medium mb-1">Isi</label>
               <textarea
                 value={data.isi}
-                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                  setData('isi', e.target.value)
-                }
+                onChange={(e) => setData('isi', e.target.value)}
                 className="w-full border rounded px-3 py-2"
                 required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Foto (opsional)
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setData('foto', e.target.files?.[0] || null)}
+                className="w-full"
               />
             </div>
             <div className="flex justify-end gap-2 pt-2">
@@ -83,7 +91,11 @@ export default function CreateModal({ open, onClose }: CreateModalProps) {
               >
                 Batal
               </Button>
-              <Button type="submit" disabled={processing}>
+              <Button
+                type="submit"
+                disabled={processing}
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-800"
+              >
                 Simpan
               </Button>
             </div>

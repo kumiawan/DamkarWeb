@@ -29,7 +29,7 @@ export default function Authenticated({
               </div>
             </div>
 
-            <div className="hidden lg:w-[645px] lg:gap-16 md:gap-4 sm:rounded-xl sm:justify-center sm:items-center sm:flex sm:bg-oren">
+            <div className="hidden lg:w-[845px] lg:gap-16 md:gap-4 sm:rounded-xl sm:justify-center sm:items-center sm:flex sm:bg-oren">
               <NavLink
                 href="/dashboard"
                 icon={
@@ -59,7 +59,7 @@ export default function Authenticated({
                 href="/berita"
                 icon={
                   <img
-                    src="/images/icon/map.svg"
+                    src="/images/icon/newspaper.png"
                     alt="berita"
                     className="w-8 h-8"
                   />
@@ -67,11 +67,25 @@ export default function Authenticated({
                 label="Berita"
                 active={route().current('berita')}
               />
+
+              <NavLink
+                href="/youtube"
+                icon={
+                  <img
+                    src="/images/icon/youtube.png"
+                    alt="youtube"
+                    className="w-8 h-8"
+                  />
+                }
+                label="youtube"
+                active={route().current('youtube')}
+              />
+
               <NavLink
                 href="/profile"
                 icon={
                   <img
-                    src="/images/icon/monitoring.svg"
+                    src="/images/icon/account.png"
                     alt="Profile"
                     className="w-8 h-8"
                   />

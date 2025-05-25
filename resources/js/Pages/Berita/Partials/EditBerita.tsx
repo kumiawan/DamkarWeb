@@ -2,6 +2,7 @@ import { useForm } from '@inertiajs/react';
 import { Dialog } from '@headlessui/react';
 import { useEffect } from 'react';
 import { Berita } from '@/Types/Berita';
+import { router } from '@inertiajs/react';
 
 interface EditBeritaProps {
   isOpen: boolean;
@@ -14,10 +15,11 @@ export default function EditBerita({
   onClose,
   berita,
 }: EditBeritaProps) {
-  const { data, setData, put, processing, reset, errors } = useForm({
+  const { data, setData, reset, errors } = useForm({
     judul: '',
     penulis: '',
     isi: '',
+    foto: null as File | null,
   });
 
   useEffect(() => {
@@ -26,6 +28,7 @@ export default function EditBerita({
         judul: berita.judul,
         penulis: berita.penulis,
         isi: berita.isi,
+        foto: null,
       });
     }
   }, [berita]);
@@ -34,7 +37,16 @@ export default function EditBerita({
     e.preventDefault();
     if (!berita) return;
 
-    put(`/berita/${berita.id}`, {
+    const formData = new FormData();
+    formData.append('_method', 'PUT');
+    formData.append('judul', data.judul);
+    formData.append('penulis', data.penulis);
+    formData.append('isi', data.isi);
+    if (data.foto) {
+      formData.append('foto', data.foto);
+    }
+
+    router.post(`/berita/${berita.id}`, formData, {
       onSuccess: () => {
         reset();
         onClose();
@@ -61,9 +73,7 @@ export default function EditBerita({
               <input
                 type="text"
                 value={data.judul}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setData('judul', e.target.value)
-                }
+                onChange={(e) => setData('judul', e.target.value)}
                 className="w-full border rounded px-3 py-2"
               />
               {errors.judul && (
@@ -76,9 +86,7 @@ export default function EditBerita({
               <input
                 type="text"
                 value={data.penulis}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setData('penulis', e.target.value)
-                }
+                onChange={(e) => setData('penulis', e.target.value)}
                 className="w-full border rounded px-3 py-2"
               />
               {errors.penulis && (
@@ -90,14 +98,31 @@ export default function EditBerita({
               <label className="block text-sm font-medium">Isi</label>
               <textarea
                 value={data.isi}
-                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                  setData('isi', e.target.value)
-                }
+                onChange={(e) => setData('isi', e.target.value)}
                 className="w-full border rounded px-3 py-2"
                 rows={4}
               />
               {errors.isi && (
                 <p className="text-sm text-red-500">{errors.isi}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium">
+                Ganti Foto (opsional)
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setData('foto', e.target.files?.[0] || null)}
+              />
+              {berita.foto && (
+                <p className="text-sm text-gray-500 mt-1">
+                  Menggunakan foto lama jika tidak memilih foto baru.
+                </p>
+              )}
+              {errors.foto && (
+                <p className="text-sm text-red-500">{errors.foto}</p>
               )}
             </div>
 
@@ -114,8 +139,7 @@ export default function EditBerita({
               </button>
               <button
                 type="submit"
-                disabled={processing}
-                className="px-4 py-2 bg-blue-600 text-white rounded"
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-800"
               >
                 Simpan
               </button>

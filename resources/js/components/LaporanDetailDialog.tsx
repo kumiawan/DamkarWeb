@@ -57,65 +57,72 @@ export default function LaporanDetailDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="max-h-[90vh] overflow-auto">
         <DialogHeader>
           <DialogTitle>Detail Laporan</DialogTitle>
         </DialogHeader>
 
         {laporan ? (
-          <div className="space-y-2">
-            <div className="border-b p-4">
+          <div className="space-y-6">
+            {/* Informasi Laporan */}
+            <div className="space-y-2 text-sm text-gray-800 border-b pb-4">
               <p>
                 <strong>ID:</strong> {laporan.id}
               </p>
               <p>
-                <strong>Lokasi Laporan:</strong> {laporan.lokasi}
+                <strong>Lokasi:</strong> {laporan.lokasi}
               </p>
               <p>
                 <strong>Nama Pelapor:</strong> {laporan.nama_pelapor}
               </p>
               <p>
-                <strong>No HP Pelapor:</strong> {laporan.notlp}
+                <strong>No HP:</strong> {laporan.notlp}
               </p>
               <p>
-                <strong>Jenis :</strong> {laporan.jenis_kebakaran}
+                <strong>Jenis Kebakaran:</strong> {laporan.jenis_kebakaran}
               </p>
               <p>
-                <strong>Waktu lapor :</strong> {laporan.waktu_lapor}
+                <strong>Waktu Lapor:</strong> {laporan.waktu_lapor}
               </p>
               <p>
-                <strong>Status :</strong> {laporan.status}
+                <strong>Status:</strong> {laporan.status}
               </p>
-              <p>
-                <strong>Laporan Foto:</strong>
+            </div>
+
+            <div>
+              <p className="text-sm font-medium text-gray-700 mb-2">
+                Foto Laporan:
               </p>
-              <div className="flex gap-2 overflow-x-auto py-2">
-                {laporan.foto?.length > 0 ? (
-                  laporan.foto.map((url, index) => (
-                    <div
-                      key={index}
-                      className="min-w-64 h-64 border rounded overflow-hidden"
-                    >
-                      <img
-                        src={url}
-                        alt={`Foto ${index + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-sm text-gray-500">
-                    Tidak ada foto tersedia.
-                  </p>
-                )}
+              <div className="w-96 overflow-x-auto">
+                <div className="flex gap-3 w-max pb-2">
+                  {laporan.foto?.length > 0 ? (
+                    laporan.foto.map((url, index) => (
+                      <div
+                        key={index}
+                        className="w-64 flex-shrink-0 aspect-video bg-gray-100 border rounded flex items-center justify-center overflow-hidden"
+                      >
+                        <img
+                          src={`/${url}`}
+                          alt={`Foto ${index + 1}`}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-sm text-gray-500">
+                      Tidak ada foto tersedia.
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
 
-            <DialogHeader>
-              <DialogTitle>Verifikasi Laporan</DialogTitle>
-            </DialogHeader>
+            {/* Verifikasi Form */}
+            <div className="space-y-4 border-t pt-4">
+              <DialogHeader>
+                <DialogTitle>Verifikasi Laporan</DialogTitle>
+              </DialogHeader>
 
-            <form className="space-y-4 mt-4">
               <p className="text-sm text-gray-700">
                 Centang daftar kelengkapan data pelapor untuk verifikasi:
               </p>
@@ -134,38 +141,37 @@ export default function LaporanDetailDialog({
                 </label>
               </div>
 
-              <div className="mt-4">
-                <p className="text-sm font-medium text-gray-700 mb-2">
+              <div>
+                <p className="text-sm font-medium text-gray-700 mb-1">
                   Catatan Verifikasi:
                 </p>
                 <Textarea
                   value={catatan}
                   onChange={(e) => setCatatan(e.target.value)}
+                  placeholder="Masukkan catatan (opsional)"
                 />
               </div>
 
-              <div className="flex gap-4">
-                <div className="flex gap-4">
-                  <Button
-                    className="bg-green-500 hover:bg-green-800"
-                    type="button"
-                    onClick={() => handleVerifikasi('selesai')}
-                  >
-                    Terima
-                  </Button>
-                  <Button
-                    className="bg-red-500 hover:bg-red-800"
-                    type="button"
-                    onClick={() => handleVerifikasi('spam')}
-                  >
-                    Tolak
-                  </Button>
-                </div>
+              <div className="flex gap-4 justify-end">
+                <Button
+                  className="bg-green-500 hover:bg-green-700"
+                  type="button"
+                  onClick={() => handleVerifikasi('selesai')}
+                >
+                  Terima
+                </Button>
+                <Button
+                  className="bg-red-500 hover:bg-red-700"
+                  type="button"
+                  onClick={() => handleVerifikasi('spam')}
+                >
+                  Tolak
+                </Button>
               </div>
-            </form>
+            </div>
           </div>
         ) : (
-          <p>Memuat data...</p>
+          <p className="text-center text-gray-500">Memuat data...</p>
         )}
       </DialogContent>
     </Dialog>

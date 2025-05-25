@@ -26,6 +26,7 @@ export default function BeritaTable({
       <TableHeader>
         <TableRow>
           <TableHead className="w-16">ID</TableHead>
+          <TableHead>Foto</TableHead>
           <TableHead>Judul</TableHead>
           <TableHead>Penulis</TableHead>
           <TableHead>Tanggal</TableHead>
@@ -36,7 +37,17 @@ export default function BeritaTable({
         {data.map((berita) => (
           <TableRow key={berita.id}>
             <TableCell className="font-medium">{berita.id}</TableCell>
-            <TableCell>{berita.judul}</TableCell>
+            <TableCell>
+              <div>
+                {berita.foto && (
+                  <img
+                    src={`/storage/${berita.foto}`}
+                    className="w-20 mt-1 rounded"
+                  />
+                )}
+              </div>
+            </TableCell>
+            <TableCell> {berita.judul} </TableCell>
             <TableCell>{berita.penulis}</TableCell>
             <TableCell>
               {new Date(berita.created_at || '').toLocaleDateString('id-ID', {

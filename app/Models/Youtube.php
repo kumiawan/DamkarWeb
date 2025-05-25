@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Berita extends Model
+class Youtube extends Model
 {
     use HasFactory;
-    protected $fillable = ['judul', 'penulis', 'isi', 'foto'];
+    protected $fillable = ['linkYoutube'];
 }

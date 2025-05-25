@@ -22,6 +22,7 @@ class CreateLaporansTable extends Migration
             $table->timestamp('waktu_lapor')->useCurrent();
             $table->string('status')->default('menunggu');
             $table->text('catatan')->nullable();
+            $table->text('foto')->nullable();
             $table->timestamps();
         });
     }
