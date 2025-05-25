@@ -44,13 +44,21 @@ export default function EditYoutube({
   if (!youtube) return null;
 
   return (
-    <Dialog open={isOpen} onClose={onClose} className="fixed inset-0 z-50 overflow-y-auto">
+    <Dialog
+      open={isOpen}
+      onClose={onClose}
+      className="fixed inset-0 z-50 overflow-y-auto"
+    >
       <div className="flex items-center justify-center min-h-screen bg-black/30 p-4">
         <Dialog.Panel className="bg-white p-6 rounded shadow max-w-md w-full">
-          <Dialog.Title className="text-lg font-semibold mb-4">Edit Link Youtube</Dialog.Title>
+          <Dialog.Title className="text-lg font-semibold mb-4">
+            Edit Link Youtube
+          </Dialog.Title>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Link YouTube</label>
+              <label className="block text-sm font-medium mb-1">
+                Link YouTube
+              </label>
               <input
                 type="text"
                 value={data.linkYoutube}

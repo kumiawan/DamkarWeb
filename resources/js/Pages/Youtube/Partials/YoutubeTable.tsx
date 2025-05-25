@@ -50,7 +50,10 @@ export default function YoutubeTable({
               >
                 Edit
               </Button>
-              <Button variant="destructive" onClick={() => onDelete(youtube.id)}>
+              <Button
+                variant="destructive"
+                onClick={() => onDelete(youtube.id)}
+              >
                 Delete
               </Button>
             </TableCell>
