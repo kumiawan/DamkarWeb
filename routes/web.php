@@ -3,6 +3,7 @@
 use App\Http\Controllers\PemantauanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\YoutubeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,6 +29,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');
     Route::put('/berita/{id}', [BeritaController::class, 'update'])->name('berita.update');
     Route::delete('/berita/{id}', [BeritaController::class, 'destroy'])->name('berita.destroy');
+
+    Route::get('/youtube', [YoutubeController::class, 'index'])->name('youtube');
+    Route::get('/youtube/create', [YoutubeController::class, 'create'])->name('youtube.create');
+    Route::post('/youtube', [YoutubeController::class, 'store'])->name('youtube.store');
+    Route::put('/youtube/{id}', [YoutubeController::class, 'update'])->name('youtube.update');
+    Route::delete('/youtube/{id}', [YoutubeController::class, 'destroy'])->name('youtube.destroy');
 });
 
 require __DIR__.'/auth.php';
