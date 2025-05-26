@@ -16,10 +16,10 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: toor
           MYSQL_DATABASE: damkar_app
-          MYSQL_USER: damkar
-          MYSQL_PASSWORD: damkar
+          MYSQL_USER: root
+          MYSQL_PASSWORD: toor
         ports:
           - 3306:3306
         options: >-
