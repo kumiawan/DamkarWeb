@@ -10,6 +10,7 @@ Route::post('/laporan', [LaporanController::class, 'create']);
 Route::get('/laporan', [LaporanController::class, 'index']);
 Route::get('/laporan/{id}', [LaporanController::class, 'show']);
 Route::put('/laporan/{id}', [LaporanController::class, 'update']);
+/* TODO: fungsi delete belum ada kocak */
 
 
 Route::get('/weather', function (Request $request) {
