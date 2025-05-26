@@ -11,6 +11,8 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    steps:
+          - run: echo "Running CI"
 
     services:
       mysql:
