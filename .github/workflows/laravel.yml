@@ -76,7 +76,7 @@ jobs:
         run: php artisan migrate --force
 
       - name: Run tests
-        run: ./vendor/bin/pest
+        run: php artisan test
 
       - name: Upload test coverage (optional)
         if: success()
