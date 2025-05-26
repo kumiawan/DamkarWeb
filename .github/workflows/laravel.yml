@@ -55,8 +55,8 @@ jobs:
           echo "DB_HOST=127.0.0.1" >> .env
           echo "DB_PORT=3306" >> .env
           echo "DB_DATABASE=damkar_app" >> .env
-          echo "DB_USERNAME=root" >> .env
-          echo "DB_PASSWORD=root" >> .env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
 
       - name: Generate application key
         run: php artisan key:generate
@@ -87,6 +87,18 @@ jobs:
 
       - name: Run tests
         run: php artisan test
+
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/DamkarWeb
+            git pull origin main
+            docker-compose down
+            docker-compose up -d --build
 
       - name: Upload test coverage (optional)
         if: success()

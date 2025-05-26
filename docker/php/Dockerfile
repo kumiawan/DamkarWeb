@@ -1,7 +1,9 @@
 FROM php:8.2-fpm
 
-WORKDIR /var/www
+# Set working directory
+WORKDIR /var/www/html
 
+# Install system dependencies & PHP extensions
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpng-dev \
@@ -13,19 +15,28 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     gnupg \
-    && docker-php-ext-install pdo pdo_mysql zip exif pcntl
+    nodejs \
+    npm \
+    && docker-php-ext-install pdo pdo_mysql zip exif pcntl \
+    && apt-get clean
 
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
-    && apt-get install -y nodejs
-
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Copy project files
 COPY . .
 
-RUN composer install
+# Install PHP dependencies
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+
+# Install and build front-end
 RUN npm install && npm run build
 
-RUN chmod -R 775 storage
+# Set proper permissions
+# RUN chown -R www-data:www-data . \
+#     && chmod -R 775 storage bootstrap/cache
 RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
 
+EXPOSE 9000
 CMD ["php-fpm"]
