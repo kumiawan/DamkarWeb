@@ -18,7 +18,6 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: damkar_app
-          MYSQL_USER: root
           MYSQL_PASSWORD: toor
         ports:
           - 3306:3306
