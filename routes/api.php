@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BeritaApiController;
 use App\Http\Controllers\Api\LaporanMobileController;
-use App\Http\Controllers\Api\RegisterMobileController;
+use App\Http\Controllers\Api\YoutubeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\Api\LapKejController;
 
 
 /* TODO: tambahkan sanctum agar tidak ter-ekspose ke publik */
@@ -41,10 +43,16 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
-#Route::post('/laporan', [LaporanMobileController::class, 'store']);
+// Route::post('/laporankej', [LaporanMobileController::class, 'store']);
 
 Route::post('change-password', [AuthController::class, 'changePassword']);
 
 Route::post('update-user', [AuthController::class, 'update']);
 
 Route::post('validate-old-password', [AuthController::class, 'validateOldPassword']);
+
+Route::post('/laporankej', [LapKejController::class, 'store']);
+
+Route::get('/youtubeapi', [YoutubeController::class, 'index']);
+
+Route::get('/beritaapi', action: [BeritaApiController::class, 'index']);

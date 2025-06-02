@@ -14,31 +14,45 @@ class LaporanMobileController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_kebakaran' => 'required|string|max:255',
-            'lokasi' => 'required|string|max:255',
-            'lat' => 'required|numeric',
-            'lng' => 'required|numeric',
             'nama_pelapor' => 'required|string|max:255',
             'notlp' => 'required|string|max:15',
-            'status' => 'nullable|string|max:50',
-            'catatan' => 'nullable|string|max:255',
+            'waktu_lapor' => 'required|date',
+            'jenis_kebakaran' => 'required|string|max:100',
+            'lat' => 'required|numeric',
+            'lng' => 'required|numeric',
+            'lokasi' => 'required|string|max:255',
+            'catatan' => 'nullable|string',
+            'foto.*' => 'image|mimes:jpeg,png,jpg,heic|max:2048',
         ]);
 
+        $paths = [];
+
+        if ($request->hasFile('foto')) {
+            foreach ($request->file('foto') as $image) {
+                $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('fotoKebakaran');
+                $image->move($destinationPath, $filename);
+
+                // Simpan path relatif, misal: '/fotoKebakaran/nama_file.jpg'
+                $paths[] = '/fotoKebakaran/' . $filename;
+            }
+        }
+
         $laporan = Laporan::create([
-            'jenis_kebakaran' => $request->jenis_kebakaran,
-            'lokasi' => $request->lokasi,
-            'lat' => $request->lat,
-            'lng' => $request->lng,
             'nama_pelapor' => $request->nama_pelapor,
             'notlp' => $request->notlp,
-            'status' => $request->status ?? 'menunggu',
+            'waktu_lapor' => $request->waktu_lapor ?? now(), // fallback ke sekarang
+            'jenis_kebakaran' => $request->jenis_kebakaran,
+            'lat' => $request->lat,
+            'lng' => $request->lng,
+            'lokasi' => $request->lokasi,
             'catatan' => $request->catatan,
+            'status' => 'menunggu', // default
+            'foto' => json_encode($paths),
         ]);
 
         return response()->json([
-            'success' => true,
-            'message' => 'Laporan berhasil dikirim',
-            'data' => $laporan
-        ], 201);
+            'message' => 'Laporan berhasil disimpan',
+        ], 200);
     }
 }

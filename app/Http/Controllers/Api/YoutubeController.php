@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Berita;
 use Illuminate\Http\Request;
+use App\Models\Youtube;
 
-class BeritaApiController extends Controller
+class YoutubeController extends Controller
 {
     public function index()
     {
-        return response()->json(Berita::all());
+        return response()->json(Youtube::latest()->get());
     }
 }
